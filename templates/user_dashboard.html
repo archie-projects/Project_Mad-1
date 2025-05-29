@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>User Dashboard</title>
+  <link rel="stylesheet" href="../static/advanced_styles_user.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div class="dashboard-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">
+          <div class="logo-icon">🅿️</div>
+          <div class="logo-text">ParkSmart</div>
+        </div>
+      </div>
+      <nav class="nav-menu">
+        <a href="user_dashboard.html" class="nav-item active">Dashboard</a>
+        <a href="user_search_parking.html" class="nav-item">Search Parking</a>
+        <a href="summary_for_user.html" class="nav-item">Summary</a>
+        <a href="edit_profile.html" class="nav-item">Edit Profile</a>
+        <a href="logout_user.html" class="nav-item">Logout</a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="top-header">
+        <div class="header-left">
+          <h1>Welcome to Your Dashboard</h1>
+          <div class="breadcrumb">User <span class="separator">/</span> Dashboard</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Recent Parking History</div>
+        </div>
+        <div class="activity-list">
+          <div class="activity-item">
+            <div class="activity-icon vehicle-in">🚗</div>
+            <div class="activity-details">
+              <div class="activity-text">Location: XXXXX | TN318888</div>
+              <div class="activity-meta">Timestamp: xx-xx-xx</div>
+            </div>
+            <div class="activity-status out">Release</div>
+          </div>
+          <div class="activity-item">
+            <div class="activity-icon vehicle-out">🚙</div>
+            <div class="activity-details">
+              <div class="activity-text">Location: XXXXX | AP310421</div>
+              <div class="activity-meta">Timestamp: xx-xx-xx</div>
+            </div>
+            <div class="activity-status in">Parked Out</div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+
+</html>

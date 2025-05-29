@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Profile</title>
+  <link rel="stylesheet" href="../static/advanced_styles_user.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div class="dashboard-container">
+
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">
+          <div class="logo-icon">🅿️</div>
+          <div class="logo-text">ParkSmart</div>
+        </div>
+      </div>
+      <nav class="nav-menu">
+        <a href="user_dashboard.html" class="nav-item">Dashboard</a>
+        <a href="user_search_parking.html" class="nav-item">Search Parking</a>
+        <a href="summary_for_user.html" class="nav-item">Summary</a>
+        <a href="edit_profile.html" class="nav-item active">Edit Profile</a>
+        <a href="logout_user.html" class="nav-item">Logout</a>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <div class="top-header">
+        <div class="header-left">
+          <h1>Edit Profile</h1>
+          <div class="breadcrumb">User <span class="separator">/</span> Edit Profile</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Update Your Info</div>
+        </div>
+        <form style="display: flex; flex-direction: column; gap: 1rem; max-width: 400px; margin-top: 2rem;">
+          <input class="search-input" type="text" placeholder="Full Name">
+          <input class="search-input" type="email" placeholder="Email">
+          <input class="search-input" type="tel" placeholder="Phone Number">
+          <button class="btn-primary" type="submit">Save Changes</button>
+        </form>
+      </div>
+    </main>
+  </div>
+</body>
+
+</html>
