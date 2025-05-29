@@ -1,0 +1,65 @@
+<!-- admin_search.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Admin - Search</title>
+  <link rel="stylesheet" href="../static/advanced_styles_user.css">
+</head>
+
+<body>
+  <div class="dashboard-container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">
+          <div class="logo-icon">🅿️</div>
+          <span class="logo-text">ParkTech Pro</span>
+        </div>
+      </div>
+      <nav class="nav-menu">
+        <a href="admin_dashboard.html" class="nav-item"><span class="nav-text">Dashboard</span></a>
+        <a href="admin_users.html" class="nav-item"><span class="nav-text">Users</span></a>
+        <a href="admin_search.html" class="nav-item active"><span class="nav-text">Search</span></a>
+        <a href="admin_summary.html" class="nav-item"><span class="nav-text">Summary</span></a>
+        <!-- <a href="admin_profile.html" class="nav-item"><span class="nav-text">Edit Profile</span></a> -->
+      </nav>
+    </aside>
+    <main class="main-content">
+      <div class="top-header">
+        <div class="header-left">
+          <h1>Search Parking</h1>
+          <div class="breadcrumb">Welcome to Admin / Search</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Search by Criteria</h3>
+        </div>
+        <div style="display: flex; gap: 1rem; align-items: center;">
+          <select class="search-input">
+            <option value="user_id">User ID</option>
+            <option value="location">Location</option>
+          </select>
+          <input type="text" class="search-input" placeholder="Enter search string">
+          <button class="search-btn">🔍</button>
+        </div>
+
+        <div style="margin-top: 2rem;">
+          <h4 class="card-title">Example search parking lots @Velachery location</h4>
+          <div class="parking-visual">
+            <div class="parking-row">
+              <div class="parking-spot occupied">1</div>
+              <div class="parking-spot available">2</div>
+              <div class="parking-spot reserved">3</div>
+              <div class="parking-spot available">4</div>
+              <div class="parking-spot occupied">5</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+
+</html>

@@ -1,382 +1,201 @@
+<!-- admin_dashboard.html -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ParkTech Pro - Admin Dashboard</title>
-    <link rel="stylesheet" href="../static/advanced_styles_user.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="../static/advanced_styles_user.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* Glow hover effects */
+    .lot-card {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: 16px;
+      position: relative;
+      overflow: hidden;
+    }
     
+    .lot-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.1),
+        0 0 30px rgba(59, 130, 246, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+    }
+    
+    .lot-card:hover::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(139, 92, 246, 0.05));
+      pointer-events: none;
+    }
+    
+    .btn-primary, .btn-secondary {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 
+        0 10px 25px rgba(59, 130, 246, 0.4),
+        0 0 20px rgba(59, 130, 246, 0.3);
+      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    }
+    
+    .btn-secondary:hover {
+      transform: translateY(-2px);
+      box-shadow: 
+        0 8px 20px rgba(0, 0, 0, 0.15),
+        0 0 15px rgba(107, 114, 128, 0.3);
+      background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+      border-color: rgba(59, 130, 246, 0.4);
+    }
+    
+    .parking-spot {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .parking-spot:hover {
+      transform: scale(1.1);
+      z-index: 10;
+      position: relative;
+    }
+    
+    .parking-spot.occupied:hover {
+      box-shadow: 0 0 15px rgba(239, 68, 68, 0.6);
+      background: linear-gradient(135deg, #ef4444, #dc2626);
+    }
+    
+    .parking-spot.available:hover {
+      box-shadow: 0 0 15px rgba(34, 197, 94, 0.6);
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+    }
+    
+    .nav-item {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .nav-item:hover {
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
+      border-left: 3px solid #3b82f6;
+      box-shadow: inset 0 0 20px rgba(59, 130, 246, 0.1);
+      transform: translateX(5px);
+    }
+    
+    .nav-item.active {
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(139, 92, 246, 0.15));
+      border-left: 3px solid #3b82f6;
+      box-shadow: inset 0 0 25px rgba(59, 130, 246, 0.2);
+    }
+    
+    /* Subtle glow animation for occupied spots */
+    @keyframes subtle-pulse {
+      0%, 100% { 
+        box-shadow: 0 0 5px rgba(239, 68, 68, 0.3); 
+      }
+      50% { 
+        box-shadow: 0 0 10px rgba(239, 68, 68, 0.5); 
+      }
+    }
+    
+    .parking-spot.occupied {
+      animation: subtle-pulse 3s ease-in-out infinite;
+    }
+    
+    /* Header glow effect */
+    .top-header h1 {
+      transition: all 0.3s ease;
+    }
+    
+    .top-header:hover h1 {
+      text-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+    }
+  </style>
 </head>
+
 <body>
-    <div class="dashboard-container">
-        <!-- Sidebar Navigation -->
-        <nav class="sidebar">
-            <div class="sidebar-header">
-                <div class="logo">
-                    <div class="logo-icon">🅿️</div>
-                    <span class="logo-text">ParkTech Pro</span>
-                </div>
-                <div class="status-indicator online"></div>
+  <div class="dashboard-container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">
+          <div class="logo-icon">🅿️</div>
+          <span class="logo-text">ParkTech Pro</span>
+        </div>
+      </div>
+      <nav class="nav-menu">
+        <a href="admin_dashboard.html" class="nav-item active"><span class="nav-text">Dashboard</span></a>
+        <a href="admin_users.html" class="nav-item"><span class="nav-text">Users</span></a>
+        <a href="admin_search.html" class="nav-item"><span class="nav-text">Search</span></a>
+        <a href="admin_summary.html" class="nav-item"><span class="nav-text">Summary</span></a>
+        <!-- <a href="admin_profile.html" class="nav-item"><span class="nav-text">Edit Profile</span></a> -->
+      </nav>
+    </aside>
+    <main class="main-content">
+      <div class="top-header">
+        <div class="header-left">
+          <h1>Admin Dashboard</h1>
+          <div class="breadcrumb">Welcome to Admin</div>
+        </div>
+        <a href="admin_profile.html" class="btn-secondary">Edit Profile</a>
+      </div>
+      <div class="lots-grid">
+        <div class="lot-card">
+          <div class="lot-header">
+            <div>
+              <h3 class="lot-name">Parking#1</h3>
+              <div class="lot-address">Occupied: 3 / 15</div>
             </div>
-            
-            <div class="nav-menu">
-                <a href="#" class="nav-item active">
-                    <span class="nav-icon">📊</span>
-                    <span class="nav-text">Dashboard</span>
-                    <div class="nav-indicator"></div>
-                </a>
-                <a href="#" class="nav-item">
-                    <span class="nav-icon">🚗</span>
-                    <span class="nav-text">Parking Lots</span>
-                    <span class="nav-badge">12</span>
-                </a>
-                <a href="#" class="nav-item">
-                    <span class="nav-icon">📋</span>
-                    <span class="nav-text">Reservations</span>
-                    <span class="nav-badge">24</span>
-                </a>
-                <a href="#" class="nav-item">
-                    <span class="nav-icon">👥</span>
-                    <span class="nav-text">Users</span>
-                </a>
-                <a href="#" class="nav-item">
-                    <span class="nav-icon">💰</span>
-                    <span class="nav-text">Revenue</span>
-                </a>
-                <a href="#" class="nav-item">
-                    <span class="nav-icon">📈</span>
-                    <span class="nav-text">Analytics</span>
-                </a>
-                <a href="#" class="nav-item">
-                    <span class="nav-icon">⚙️</span>
-                    <span class="nav-text">Settings</span>
-                </a>
+            <div class="lot-status low-occupancy">
+              <button class="btn-secondary">Edit</button>
+              <button class="btn-secondary">Delete</button>
             </div>
-
-            <div class="sidebar-footer">
-                <div class="user-profile">
-                    <div class="user-avatar">A</div>
-                    <div class="user-info">
-                        <div class="user-name">Admin User</div>
-                        <div class="user-role">System Admin</div>
-                    </div>
-                </div>
+          </div>
+          <div class="parking-visual">
+            <div class="parking-row">
+              <div class="parking-spot occupied">1</div>
+              <div class="parking-spot occupied">2</div>
+              <div class="parking-spot available">3</div>
+              <div class="parking-spot available">4</div>
+              <div class="parking-spot available">5</div>
             </div>
-        </nav>
-
-        <!-- Main Content -->
-        <main class="main-content">
-            <!-- Top Header -->
-            <header class="top-header">
-                <div class="header-left">
-                    <h1 class="page-title">Dashboard Overview</h1>
-                    <div class="breadcrumb">
-                        <span>Home</span> <span class="separator">></span> <span class="current">Dashboard</span>
-                    </div>
-                </div>
-                <div class="header-right">
-                    <div class="search-container">
-                        <input type="text" placeholder="Search parking lots..." class="search-input">
-                        <button class="search-btn">🔍</button>
-                    </div>
-                    <div class="header-actions">
-                        <button class="action-btn notification-btn">
-                            🔔
-                            <span class="notification-dot"></span>
-                        </button>
-                        <button class="action-btn profile-btn">👤</button>
-                    </div>
-                </div>
-            </header>
-
-            <!-- Stats Grid -->
-            <section class="stats-section">
-                <div class="stats-grid">
-                    <div class="stat-card primary">
-                        <div class="stat-icon">🚗</div>
-                        <div class="stat-content">
-                            <div class="stat-number">1,247</div>
-                            <div class="stat-label">Total Spaces</div>
-                            <div class="stat-trend positive">+12% from last month</div>
-                        </div>
-                        <div class="stat-chart">
-                            <div class="mini-chart">
-                                <div class="bar" style="height: 20%"></div>
-                                <div class="bar" style="height: 40%"></div>
-                                <div class="bar" style="height: 60%"></div>
-                                <div class="bar" style="height: 80%"></div>
-                                <div class="bar" style="height: 100%"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="stat-card success">
-                        <div class="stat-icon">✅</div>
-                        <div class="stat-content">
-                            <div class="stat-number">892</div>
-                            <div class="stat-label">Occupied</div>
-                            <div class="stat-trend positive">+8% occupancy</div>
-                        </div>
-                        <div class="stat-progress">
-                            <div class="progress-bar" style="width: 72%"></div>
-                        </div>
-                    </div>
-
-                    <div class="stat-card warning">
-                        <div class="stat-icon">💰</div>
-                        <div class="stat-content">
-                            <div class="stat-number">₹45,320</div>
-                            <div class="stat-label">Today's Revenue</div>
-                            <div class="stat-trend positive">+15% vs yesterday</div>
-                        </div>
-                        <div class="revenue-indicator pulsing"></div>
-                    </div>
-
-                    <div class="stat-card info">
-                        <div class="stat-icon">⏰</div>
-                        <div class="stat-content">
-                            <div class="stat-number">2.4h</div>
-                            <div class="stat-label">Avg. Duration</div>
-                            <div class="stat-trend negative">-5% efficiency</div>
-                        </div>
-                        <div class="time-indicator rotating"></div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Main Dashboard Content -->
-            <section class="dashboard-content">
-                <div class="content-grid">
-                    <!-- Recent Parking History -->
-                    <div class="card recent-activity">
-                        <div class="card-header">
-                            <h3 class="card-title">Recent Parking Activity</h3>
-                            <button class="refresh-btn">🔄</button>
-                        </div>
-                        <div class="activity-list">
-                            <div class="activity-item">
-                                <div class="activity-icon vehicle-in">🚗</div>
-                                <div class="activity-details">
-                                    <div class="activity-text">Vehicle TN 31 GG 8888 entered</div>
-                                    <div class="activity-meta">
-                                        <span class="location">Dadar Road - Lot 132</span>
-                                        <span class="timestamp">2 min ago</span>
-                                    </div>
-                                </div>
-                                <div class="activity-status in">IN</div>
-                            </div>
-
-                            <div class="activity-item">
-                                <div class="activity-icon vehicle-out">🚙</div>
-                                <div class="activity-details">
-                                    <div class="activity-text">Vehicle AP 31 QQ 1921 exited</div>
-                                    <div class="activity-meta">
-                                        <span class="location">Wadala - Lot 136</span>
-                                        <span class="timestamp">5 min ago</span>
-                                    </div>
-                                </div>
-                                <div class="activity-status out">OUT</div>
-                            </div>
-
-                            <div class="activity-item">
-                                <div class="activity-icon reservation">📋</div>
-                                <div class="activity-details">
-                                    <div class="activity-text">New reservation created</div>
-                                    <div class="activity-meta">
-                                        <span class="location">K. Gandhi Marg - Lot 132</span>
-                                        <span class="timestamp">12 min ago</span>
-                                    </div>
-                                </div>
-                                <div class="activity-status reserved">RES</div>
-                            </div>
-
-                            <div class="activity-item">
-                                <div class="activity-icon payment">💳</div>
-                                <div class="activity-details">
-                                    <div class="activity-text">Payment received ₹150</div>
-                                    <div class="activity-meta">
-                                        <span class="location">Transaction #TX1234</span>
-                                        <span class="timestamp">18 min ago</span>
-                                    </div>
-                                </div>
-                                <div class="activity-status paid">PAID</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Parking Lots Grid -->
-                    <div class="card parking-lots">
-                        <div class="card-header">
-                            <h3 class="card-title">Parking Lots @ Dadar Road</h3>
-                            <div class="card-actions">
-                                <button class="btn-secondary">View All</button>
-                                <button class="btn-primary">+ Add Lot</button>
-                            </div>
-                        </div>
-                        
-                        <div class="lots-grid">
-                            <div class="lot-card">
-                                <div class="lot-header">
-                                    <div class="lot-info">
-                                        <h4 class="lot-name">K. Gandhi Marg</h4>
-                                        <p class="lot-address">ID: 132</p>
-                                    </div>
-                                    <div class="lot-status high-occupancy">
-                                        <span class="occupancy-rate">85%</span>
-                                        <span class="occupancy-label">Occupied</span>
-                                    </div>
-                                </div>
-                                
-                                <div class="lot-stats">
-                                    <div class="stat-item">
-                                        <span class="stat-value">17/20</span>
-                                        <span class="stat-label">Spaces</span>
-                                    </div>
-                                    <div class="stat-item">
-                                        <span class="stat-value">₹2,550</span>
-                                        <span class="stat-label">Revenue</span>
-                                    </div>
-                                </div>
-
-                                <div class="parking-visual">
-                                    <div class="parking-row">
-                                        <div class="parking-spot occupied">1</div>
-                                        <div class="parking-spot occupied">2</div>
-                                        <div class="parking-spot available">3</div>
-                                        <div class="parking-spot occupied">4</div>
-                                        <div class="parking-spot occupied">5</div>
-                                    </div>
-                                    <div class="parking-row">
-                                        <div class="parking-spot occupied">6</div>
-                                        <div class="parking-spot occupied">7</div>
-                                        <div class="parking-spot reserved">8</div>
-                                        <div class="parking-spot occupied">9</div>
-                                        <div class="parking-spot occupied">10</div>
-                                    </div>
-                                    <div class="parking-row">
-                                        <div class="parking-spot occupied">11</div>
-                                        <div class="parking-spot occupied">12</div>
-                                        <div class="parking-spot occupied">13</div>
-                                        <div class="parking-spot available">14</div>
-                                        <div class="parking-spot occupied">15</div>
-                                    </div>
-                                    <div class="parking-row">
-                                        <div class="parking-spot occupied">16</div>
-                                        <div class="parking-spot occupied">17</div>
-                                        <div class="parking-spot occupied">18</div>
-                                        <div class="parking-spot available">19</div>
-                                        <div class="parking-spot occupied">20</div>
-                                    </div>
-                                </div>
-
-                                <div class="lot-actions">
-                                    <button class="action-btn manage">Manage</button>
-                                    <button class="action-btn analytics">Analytics</button>
-                                </div>
-                            </div>
-
-                            <div class="lot-card">
-                                <div class="lot-header">
-                                    <div class="lot-info">
-                                        <h4 class="lot-name">Wadala Complex</h4>
-                                        <p class="lot-address">ID: 136</p>
-                                    </div>
-                                    <div class="lot-status medium-occupancy">
-                                        <span class="occupancy-rate">60%</span>
-                                        <span class="occupancy-label">Occupied</span>
-                                    </div>
-                                </div>
-                                
-                                <div class="lot-stats">
-                                    <div class="stat-item">
-                                        <span class="stat-value">12/20</span>
-                                        <span class="stat-label">Spaces</span>
-                                    </div>
-                                    <div class="stat-item">
-                                        <span class="stat-value">₹1,800</span>
-                                        <span class="stat-label">Revenue</span>
-                                    </div>
-                                </div>
-
-                                <div class="parking-visual">
-                                    <div class="parking-row">
-                                        <div class="parking-spot occupied">1</div>
-                                        <div class="parking-spot available">2</div>
-                                        <div class="parking-spot occupied">3</div>
-                                        <div class="parking-spot available">4</div>
-                                        <div class="parking-spot occupied">5</div>
-                                    </div>
-                                    <div class="parking-row">
-                                        <div class="parking-spot available">6</div>
-                                        <div class="parking-spot occupied">7</div>
-                                        <div class="parking-spot occupied">8</div>
-                                        <div class="parking-spot available">9</div>
-                                        <div class="parking-spot occupied">10</div>
-                                    </div>
-                                    <div class="parking-row">
-                                        <div class="parking-spot occupied">11</div>
-                                        <div class="parking-spot available">12</div>
-                                        <div class="parking-spot occupied">13</div>
-                                        <div class="parking-spot occupied">14</div>
-                                        <div class="parking-spot available">15</div>
-                                    </div>
-                                    <div class="parking-row">
-                                        <div class="parking-spot occupied">16</div>
-                                        <div class="parking-spot available">17</div>
-                                        <div class="parking-spot occupied">18</div>
-                                        <div class="parking-spot available">19</div>
-                                        <div class="parking-spot occupied">20</div>
-                                    </div>
-                                </div>
-
-                                <div class="lot-actions">
-                                    <button class="action-btn manage">Manage</button>
-                                    <button class="action-btn analytics">Analytics</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Quick Actions Panel -->
-                <div class="quick-actions-panel">
-                    <h3 class="panel-title">Quick Actions</h3>
-                    <div class="actions-grid">
-                        <button class="quick-action emergency">
-                            <span class="action-icon">🚨</span>
-                            <span class="action-text">Emergency Block</span>
-                        </button>
-                        <button class="quick-action report">
-                            <span class="action-icon">📊</span>
-                            <span class="action-text">Generate Report</span>
-                        </button>
-                        <button class="quick-action backup">
-                            <span class="action-icon">💾</span>
-                            <span class="action-text">Backup Data</span>
-                        </button>
-                        <button class="quick-action maintenance">
-                            <span class="action-icon">🔧</span>
-                            <span class="action-text">Maintenance Mode</span>
-                        </button>
-                        <button class="quick-action pricing">
-                            <span class="action-icon">💰</span>
-                            <span class="action-text">Update Pricing</span>
-                        </button>
-                        <button class="quick-action alerts">
-                            <span class="action-icon">🔔</span>
-                            <span class="action-text">System Alerts</span>
-                        </button>
-                    </div>
-                </div>
-            </section>
-        </main>
-    </div>
-
-    <!-- Live Status Indicator -->
-    <div class="live-status">
-        <div class="status-dot"></div>
-        <span>System Online</span>
-    </div>
+          </div>
+        </div>
+        <div class="lot-card">
+          <div class="lot-header">
+            <div>
+              <h3 class="lot-name">Parking#2</h3>
+              <div class="lot-address">Occupied: 4 / 10</div>
+            </div>
+            <div class="lot-status medium-occupancy">
+              <button class="btn-secondary">Edit</button>
+              <button class="btn-secondary">Delete</button>
+            </div>
+          </div>
+          <div class="parking-visual">
+            <div class="parking-row">
+              <div class="parking-spot occupied">1</div>
+              <div class="parking-spot occupied">2</div>
+              <div class="parking-spot available">3</div>
+              <div class="parking-spot available">4</div>
+              <div class="parking-spot available">5</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="text-align:center; margin-top: 2rem;">
+        <a href="admin_add_lot.html" class="btn-primary">+ Add Lot</a>
+      </div>
+    </main>
+  </div>
 </body>
+
 </html>

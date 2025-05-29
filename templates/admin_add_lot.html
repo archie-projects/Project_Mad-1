@@ -1,0 +1,49 @@
+<!-- admin_add_lot.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Add Parking Lot</title>
+  <link rel="stylesheet" href="../static/advanced_styles_user.css">
+</head>
+
+<body>
+  <div class="dashboard-container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">
+          <div class="logo-icon">🅿️</div>
+          <span class="logo-text">ParkTech Pro</span>
+        </div>
+      </div>
+      <nav class="nav-menu">
+        <a href="admin_dashboard.html" class="nav-item"><span class="nav-text">Dashboard</span></a>
+        <a href="admin_users.html" class="nav-item"><span class="nav-text">Users</span></a>
+        <a href="admin_search.html" class="nav-item"><span class="nav-text">Search</span></a>
+        <a href="admin_summary.html" class="nav-item"><span class="nav-text">Summary</span></a>
+        <!-- <a href="admin_profile.html" class="nav-item"><span class="nav-text">Edit Profile</span></a> -->
+      </nav>
+    </aside>
+    <main class="main-content">
+      <div class="top-header">
+        <h1>Add Parking Lot</h1>
+        <div class="breadcrumb">Admin / Add Parking Lot</div>
+      </div>
+      <div class="card">
+        <form class="form-grid">
+          <input class="search-input" type="text" placeholder="Location Name">
+          <input class="search-input" type="text" placeholder="Address">
+          <input class="search-input" type="text" placeholder="Pin Code">
+          <input class="search-input" type="number" placeholder="Total Spots">
+          <input class="search-input" type="number" placeholder="Available Spots">
+          <div style="display: flex; gap: 1rem;">
+            <button class="btn-primary" type="submit">Add</button>
+            <button class="btn-secondary" type="reset">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </main>
+  </div>
+</body>
+</html>
