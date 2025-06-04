@@ -4,8 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <title>Search Parking</title>
-  <link rel="stylesheet" href="../static/advanced_styles_user.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../static/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -39,49 +39,360 @@
 
       <div class="card">
         <div class="card-header">
-          <div class="card-title">Search Parking @Location/Pin Code</div>
+          <div class="card-title">Search Parking by Location/Pin Code</div>
         </div>
-        <div class="search-container">
-          <input class="search-input" type="text" placeholder="e.g., Dadar Road">
-          <button class="search-btn">🔍</button>
-        </div>
-
-        <div class="lots-grid" style="margin-top: 2rem;">
-          <div class="lot-card">
-            <div class="lot-header">
-              <div>
-                <div class="lot-name">K. Gadgil Marg</div>
-                <div class="lot-address">xxxxx</div>
-              </div>
-              <div class="lot-status low-occupancy">
-                <span class="occupancy-rate">6</span>
-                <div class="occupancy-label">Available</div>
-              </div>
-            </div>
-            <div class="lot-actions">
-              <button class="action-btn manage">Book</button>
-            </div>
+        
+        <div class="search-section">
+          <div class="search-container">
+            <input class="search-input" type="text" placeholder="Enter location (e.g., Dadar Road, Mumbai 400014)">
+            <button class="btn btn-primary search-btn">
+              <span>🔍</span>
+              Search
+            </button>
           </div>
+        </div>
 
-          <div class="lot-card">
-            <div class="lot-header">
-              <div>
-                <div class="lot-name">Wadala</div>
-                <div class="lot-address">xxxxx</div>
+        <div class="parking-results">
+          <h3 class="results-title">Available Parking Spots</h3>
+          
+          <div class="lots-grid">
+            <div class="parking-card">
+              <div class="parking-header">
+                <div class="parking-info">
+                  <div class="parking-name">K. Gadgil Marg Parking</div>
+                  <div class="parking-address">Near Dadar Station, Mumbai 400014</div>
+                  <div class="parking-distance">0.2 km away</div>
+                </div>
+                <div class="availability-badge available">
+                  <div class="spots-count">6</div>
+                  <div class="spots-label">Available</div>
+                </div>
               </div>
-              <div class="lot-status low-occupancy">
-                <span class="occupancy-rate">10</span>
-                <div class="occupancy-label">Available</div>
+              
+              <div class="parking-details">
+                <div class="detail-item">
+                  <span class="detail-icon">💰</span>
+                  <span class="detail-text">₹20/hour</span>
+                </div>
+                <div class="detail-item">
+                  <span class="detail-icon">🚗</span>
+                  <span class="detail-text">2-Wheeler & 4-Wheeler</span>
+                </div>
+                <div class="detail-item">
+                  <span class="detail-icon">🔒</span>
+                  <span class="detail-text">Secure Parking</span>
+                </div>
+              </div>
+              
+              <div class="parking-actions">
+                <button class="btn btn-primary">Book Now</button>
+                <button class="btn btn-secondary">View Details</button>
               </div>
             </div>
-            <div class="lot-actions">
-              <button class="action-btn manage">Book</button>
+
+            <div class="parking-card">
+              <div class="parking-header">
+                <div class="parking-info">
+                  <div class="parking-name">Wadala Commercial Complex</div>
+                  <div class="parking-address">Wadala East, Mumbai 400037</div>
+                  <div class="parking-distance">1.5 km away</div>
+                </div>
+                <div class="availability-badge available">
+                  <div class="spots-count">10</div>
+                  <div class="spots-label">Available</div>
+                </div>
+              </div>
+              
+              <div class="parking-details">
+                <div class="detail-item">
+                  <span class="detail-icon">💰</span>
+                  <span class="detail-text">₹15/hour</span>
+                </div>
+                <div class="detail-item">
+                  <span class="detail-icon">🚗</span>
+                  <span class="detail-text">4-Wheeler Only</span>
+                </div>
+                <div class="detail-item">
+                  <span class="detail-icon">🌟</span>
+                  <span class="detail-text">Premium Facility</span>
+                </div>
+              </div>
+              
+              <div class="parking-actions">
+                <button class="btn btn-primary">Book Now</button>
+                <button class="btn btn-secondary">View Details</button>
+              </div>
+            </div>
+
+            <div class="parking-card">
+              <div class="parking-header">
+                <div class="parking-info">
+                  <div class="parking-name">Central Plaza Parking</div>
+                  <div class="parking-address">Lower Parel, Mumbai 400013</div>
+                  <div class="parking-distance">2.1 km away</div>
+                </div>
+                <div class="availability-badge limited">
+                  <div class="spots-count">2</div>
+                  <div class="spots-label">Limited</div>
+                </div>
+              </div>
+              
+              <div class="parking-details">
+                <div class="detail-item">
+                  <span class="detail-icon">💰</span>
+                  <span class="detail-text">₹25/hour</span>
+                </div>
+                <div class="detail-item">
+                  <span class="detail-icon">🚗</span>
+                  <span class="detail-text">All Vehicles</span>
+                </div>
+                <div class="detail-item">
+                  <span class="detail-icon">🏢</span>
+                  <span class="detail-text">Mall Parking</span>
+                </div>
+              </div>
+              
+              <div class="parking-actions">
+                <button class="btn btn-primary">Book Now</button>
+                <button class="btn btn-secondary">View Details</button>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </main>
   </div>
+
+  <style>
+    /* Additional styles specific to search parking page */
+    .search-section {
+      margin-bottom: 30px;
+    }
+
+    .search-container {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      max-width: 600px;
+    }
+
+    .search-input {
+      flex: 1;
+      padding: 15px 20px;
+      border: 2px solid rgba(147, 51, 234, 0.1);
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 500;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+      color: #334155;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: #9333ea;
+      box-shadow: 0 0 0 3px rgba(147, 51, 234, 0.1);
+      transform: translateY(-1px);
+    }
+
+    .search-input::placeholder {
+      color: #94a3b8;
+    }
+
+    .search-btn {
+      padding: 15px 25px;
+      white-space: nowrap;
+    }
+
+    .results-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: #1e293b;
+      margin-bottom: 25px;
+      position: relative;
+    }
+
+    .results-title::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(135deg, #9333ea, #4f46e5);
+      border-radius: 2px;
+    }
+
+    .parking-results {
+      margin-top: 30px;
+    }
+
+    .lots-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 25px;
+    }
+
+    .parking-card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      border-radius: 16px;
+      padding: 25px;
+      border: 1px solid rgba(147, 51, 234, 0.1);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .parking-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(135deg, #9333ea, #4f46e5);
+    }
+
+    .parking-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(147, 51, 234, 0.15);
+    }
+
+    .parking-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+
+    .parking-name {
+      font-size: 18px;
+      font-weight: 600;
+      color: #1e293b;
+      margin-bottom: 5px;
+    }
+
+    .parking-address {
+      color: #64748b;
+      font-size: 14px;
+      margin-bottom: 3px;
+    }
+
+    .parking-distance {
+      color: #9333ea;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .availability-badge {
+      text-align: center;
+      padding: 10px 15px;
+      border-radius: 12px;
+      min-width: 80px;
+    }
+
+    .availability-badge.available {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(5, 150, 105, 0.1));
+      border: 1px solid rgba(16, 185, 129, 0.2);
+    }
+
+    .availability-badge.limited {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(217, 119, 6, 0.1));
+      border: 1px solid rgba(245, 158, 11, 0.2);
+    }
+
+    .spots-count {
+      font-size: 20px;
+      font-weight: 700;
+      color: #059669;
+      line-height: 1;
+    }
+
+    .availability-badge.limited .spots-count {
+      color: #d97706;
+    }
+
+    .spots-label {
+      font-size: 12px;
+      font-weight: 500;
+      color: #059669;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .availability-badge.limited .spots-label {
+      color: #d97706;
+    }
+
+    .parking-details {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .detail-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .detail-icon {
+      font-size: 16px;
+    }
+
+    .detail-text {
+      color: #64748b;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .parking-actions {
+      display: flex;
+      gap: 12px;
+    }
+
+    .parking-actions .btn {
+      flex: 1;
+      justify-content: center;
+      font-size: 14px;
+      padding: 12px 20px;
+    }
+
+    @media (max-width: 768px) {
+      .search-container {
+        flex-direction: column;
+        max-width: 100%;
+      }
+
+      .search-input {
+        width: 100%;
+      }
+
+      .search-btn {
+        width: 100%;
+      }
+
+      .lots-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .parking-header {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .availability-badge {
+        align-self: flex-start;
+      }
+
+      .parking-actions {
+        flex-direction: column;
+      }
+    }
+  </style>
 </body>
 
 </html>

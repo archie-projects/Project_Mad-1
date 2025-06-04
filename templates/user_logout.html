@@ -3,14 +3,14 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Logout</title>
-  <link rel="stylesheet" href="../static/advanced_styles_user.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Logout - ParkSmart</title>
+  <link rel="stylesheet" href="../static/styles.css">
 </head>
 
 <body>
   <div class="dashboard-container">
-
+    <!-- Sidebar -->
     <aside class="sidebar">
       <div class="sidebar-header">
         <div class="logo">
@@ -19,33 +19,317 @@
         </div>
       </div>
       <nav class="nav-menu">
-        <a href="user_dashboard.html" class="nav-item">Dashboard</a>
-        <a href="user_search_parking.html" class="nav-item">Search Parking</a>
-        <a href="user_summary.html" class="nav-item">Summary</a>
-        <a href="user_edit_profile.html" class="nav-item">Edit Profile</a>
-        <a href="user_logout.html" class="nav-item active">Logout</a>
+        <a href="user_dashboard.html" class="nav-item">
+          <span>🏠</span> Dashboard
+        </a>
+        <a href="user_search_parking.html" class="nav-item">
+          <span>🔍</span> Search Parking
+        </a>
+        <a href="user_summary.html" class="nav-item">
+          <span>📊</span> Summary
+        </a>
+        <a href="user_edit_profile.html" class="nav-item">
+          <span>👤</span> Edit Profile
+        </a>
+        <a href="user_logout.html" class="nav-item active">
+          <span>🚪</span> Logout
+        </a>
       </nav>
     </aside>
 
+    <!-- Main Content -->
     <main class="main-content">
-      <div class="top-header">
+      <div class="top-header fade-in-up">
         <div class="header-left">
           <h1>Logout</h1>
           <div class="breadcrumb">User <span class="separator">/</span> Logout</div>
         </div>
       </div>
 
-      <div class="card">
+      <div class="card fade-in-up">
         <div class="card-header">
-          <div class="card-title">Ready to Logout?</div>
+          <div class="card-title">Ready to Leave?</div>
         </div>
-        <div style="text-align: center; margin-top: 2rem;">
-          <p>Click below to confirm logout.</p>
-          <button class="btn-primary" onclick="alert('You have been logged out!');">Confirm Logout</button>
+        
+        <div class="logout-content">
+          <div class="logout-icon">
+            <span class="logout-emoji">👋</span>
+          </div>
+          
+          <div class="logout-text">
+            <h3>Thanks for using ParkSmart!</h3>
+            <p>Your session will be safely terminated. You can always come back anytime.</p>
+          </div>
+
+          <div class="session-info">
+            <div class="info-item">
+              <span class="info-label">Last Login:</span>
+              <span class="info-value">Today, 2:30 PM</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Session Duration:</span>
+              <span class="info-value">45 minutes</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Active Bookings:</span>
+              <span class="info-value">1 ongoing</span>
+            </div>
+          </div>
+          
+          <div class="logout-actions">
+            <button class="btn btn-primary" onclick="confirmLogout()">
+              🚪 Confirm Logout
+            </button>
+            <a href="user_dashboard.html" class="btn btn-secondary">
+              ↩️ Stay Logged In
+            </a>
+          </div>
+
+          <div class="logout-note">
+            <p><strong>Note:</strong> Your ongoing parking sessions will remain active. You can log back in anytime to manage them.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Stats Before Logout -->
+      <div class="card fade-in-up">
+        <div class="card-header">
+          <div class="card-title">Your Session Summary</div>
+        </div>
+        
+        <div class="session-stats">
+          <div class="session-stat">
+            <div class="stat-icon">🅿️</div>
+            <div class="stat-info">
+              <div class="stat-number">3</div>
+              <div class="stat-label">Parking Searches</div>
+            </div>
+          </div>
+          
+          <div class="session-stat">
+            <div class="stat-icon">📱</div>
+            <div class="stat-info">
+              <div class="stat-number">1</div>
+              <div class="stat-label">New Booking</div>
+            </div>
+          </div>
+          
+          <div class="session-stat">
+            <div class="stat-icon">💰</div>
+            <div class="stat-info">
+              <div class="stat-number">₹120</div>
+              <div class="stat-label">Amount Saved</div>
+            </div>
+          </div>
         </div>
       </div>
     </main>
   </div>
-</body>
 
-</html>
+  <script>
+    // Add fade-in animation to cards
+    document.addEventListener('DOMContentLoaded', function() {
+      const cards = document.querySelectorAll('.fade-in-up');
+      cards.forEach((card, index) => {
+        card.style.animationDelay = `${index * 0.1}s`;
+      });
+    });
+</script>
+
+
+  <style>
+    /* Logout-specific styles */
+    .logout-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 30px;
+      padding: 20px;
+    }
+
+    .logout-icon {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(147, 51, 234, 0.1), rgba(79, 70, 229, 0.1));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+      animation: wave 2s ease-in-out infinite;
+    }
+
+    @keyframes wave {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(-10deg); }
+      75% { transform: rotate(10deg); }
+    }
+
+    .logout-text h3 {
+      color: #1e293b;
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .logout-text p {
+      color: #64748b;
+      font-size: 16px;
+      line-height: 1.6;
+      max-width: 400px;
+    }
+
+    .session-info {
+      background: rgba(147, 51, 234, 0.05);
+      border: 1px solid rgba(147, 51, 234, 0.1);
+      border-radius: 12px;
+      padding: 20px;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .info-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(147, 51, 234, 0.1);
+    }
+
+    .info-item:last-child {
+      border-bottom: none;
+    }
+
+    .info-label {
+      font-weight: 500;
+      color: #64748b;
+    }
+
+    .info-value {
+      font-weight: 600;
+      color: #1e293b;
+    }
+
+    .logout-actions {
+      display: flex;
+      gap: 15px;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .logout-actions .btn {
+      flex: 1;
+      justify-content: center;
+    }
+
+    .logout-note {
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      border-radius: 12px;
+      padding: 15px;
+      max-width: 500px;
+    }
+
+    .logout-note p {
+      color: #059669;
+      font-size: 14px;
+      margin: 0;
+    }
+
+    .session-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 20px;
+    }
+
+    .session-stat {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 20px;
+      background: rgba(147, 51, 234, 0.05);
+      border-radius: 12px;
+      border: 1px solid rgba(147, 51, 234, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .session-stat:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 20px rgba(147, 51, 234, 0.1);
+    }
+
+    .session-stat .stat-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, rgba(147, 51, 234, 0.1), rgba(79, 70, 229, 0.1));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+
+    .session-stat .stat-info {
+      flex: 1;
+    }
+
+    .session-stat .stat-number {
+      font-size: 20px;
+      font-weight: 700;
+      color: #9333ea;
+      margin-bottom: 4px;
+    }
+
+    .session-stat .stat-label {
+      font-size: 12px;
+      color: #64748b;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    @media (max-width: 768px) {
+      .logout-actions {
+        flex-direction: column;
+      }
+      
+      .session-stats {
+        grid-template-columns: 1fr;
+      }
+      
+      .logout-content {
+        padding: 10px;
+      }
+      .logout-icon {
+        width: 80px;
+        height: 80px;
+        font-size: 36px;
+      }
+      .logout-text h3 {
+        font-size: 20px;
+      }
+      .logout-text p {
+        font-size: 14px;
+      }
+      .session-info {
+        max-width: 100%;
+      }
+      .session-stat {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      .session-stat .stat-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 24px;
+      }
+      .session-stat .stat-number {
+        font-size: 18px;
+      }
+      .session-stat .stat-label {
+        font-size: 14px;
+      }
+    }
+  </style>

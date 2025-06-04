@@ -3,9 +3,9 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>User Dashboard</title>
-  <link rel="stylesheet" href="../static/advanced_styles_user.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Dashboard - ParkSmart</title>
+  <link rel="stylesheet" href="../static/styles.css">
 </head>
 
 <body>
@@ -19,48 +19,172 @@
         </div>
       </div>
       <nav class="nav-menu">
-        <a href="user_dashboard.html" class="nav-item active">Dashboard</a>
-        <a href="user_search_parking.html" class="nav-item">Search Parking</a>
-        <a href="user_summary.html" class="nav-item">Summary</a>
-        <a href="edit_profile.html" class="nav-item">Edit Profile</a>
-        <a href="user_logout.html" class="nav-item">Logout</a>
+        <a href="user_dashboard.html" class="nav-item active">
+          <span>🏠</span> Dashboard
+        </a>
+        <a href="user_search_parking.html" class="nav-item">
+          <span>🔍</span> Search Parking
+        </a>
+        <a href="user_summary.html" class="nav-item">
+          <span>📊</span> Summary
+        </a>
+        <a href="edit_profile.html" class="nav-item">
+          <span>👤</span> Edit Profile
+        </a>
+        <a href="user_logout.html" class="nav-item">
+          <span>🚪</span> Logout
+        </a>
       </nav>
     </aside>
 
     <!-- Main Content -->
     <main class="main-content">
-      <div class="top-header">
+      <div class="top-header fade-in-up">
         <div class="header-left">
           <h1>Welcome to Your Dashboard</h1>
           <div class="breadcrumb">User <span class="separator">/</span> Dashboard</div>
         </div>
       </div>
 
-      <div class="card">
+      <!-- Statistics Cards -->
+      <div class="stats-grid fade-in-up">
+        <div class="stat-card">
+          <div class="stat-number">12</div>
+          <div class="stat-label">Total Bookings</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">3</div>
+          <div class="stat-label">Active Reservations</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">₹2,450</div>
+          <div class="stat-label">Total Spent</div>
+        </div>
+      </div>
+
+      <!-- Recent Parking History -->
+      <div class="card fade-in-up">
         <div class="card-header">
           <div class="card-title">Recent Parking History</div>
         </div>
         <div class="activity-list">
           <div class="activity-item">
-            <div class="activity-icon vehicle-in">🚗</div>
+            <div class="activity-icon vehicle-out">🚗</div>
             <div class="activity-details">
-              <div class="activity-text">Location: XXXXX | TN318888</div>
-              <div class="activity-meta">Timestamp: xx-xx-xx</div>
+              <div class="activity-text">Mall Parking Complex | TN31AB8888</div>
+              <div class="activity-meta">Duration: 3 hours 45 minutes • Amount: ₹180</div>
             </div>
-            <div class="activity-status out">Release</div>
+            <div class="activity-status out">Released</div>
           </div>
+          
           <div class="activity-item">
-            <div class="activity-icon vehicle-out">🚙</div>
+            <div class="activity-icon vehicle-in">🚙</div>
             <div class="activity-details">
-              <div class="activity-text">Location: XXXXX | AP310421</div>
-              <div class="activity-meta">Timestamp: xx-xx-xx</div>
+              <div class="activity-text">Metro Station Parking | AP31CD0421</div>
+              <div class="activity-meta">Started: Today 2:30 PM • Ongoing</div>
             </div>
-            <div class="activity-status in">Parked Out</div>
+            <div class="activity-status in">Currently Parked</div>
           </div>
+          
+          <div class="activity-item">
+            <div class="activity-icon vehicle-out">🚕</div>
+            <div class="activity-details">
+              <div class="activity-text">City Center Plaza | KA05EF9876</div>
+              <div class="activity-meta">Duration: 2 hours 15 minutes • Amount: ₹120</div>
+            </div>
+            <div class="activity-status out">Released</div>
+          </div>
+          
+          <div class="activity-item">
+            <div class="activity-icon vehicle-out">🏎️</div>
+            <div class="activity-details">
+              <div class="activity-text">Airport Parking Terminal 2 | TN09GH5432</div>
+              <div class="activity-meta">Duration: 8 hours 20 minutes • Amount: ₹400</div>
+            </div>
+            <div class="activity-status out">Released</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="card fade-in-up">
+        <div class="card-header">
+          <div class="card-title">Quick Actions</div>
+        </div>
+        <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+          <a href="user_search_parking.html" class="btn btn-primary">
+            🔍 Find Parking
+          </a>
+          <a href="user_summary.html" class="btn btn-secondary">
+            📊 View Summary
+          </a>
+          <a href="edit_profile.html" class="btn btn-secondary">
+            ⚙️ Settings
+          </a>
         </div>
       </div>
     </main>
   </div>
+
+  <!-- Mobile Menu Toggle (for future mobile implementation) -->
+  <script>
+    // Add fade-in animation to cards
+    document.addEventListener('DOMContentLoaded', function() {
+      const cards = document.querySelectorAll('.fade-in-up');
+      cards.forEach((card, index) => {
+        card.style.animationDelay = `${index * 0.1}s`;
+      });
+      
+      // Add click animation to activity items
+      const activityItems = document.querySelectorAll('.activity-item');
+      activityItems.forEach(item => {
+        item.addEventListener('click', function() {
+          this.style.transform = 'scale(0.98)';
+          setTimeout(() => {
+            this.style.transform = '';
+          }, 150);
+        });
+      });
+    });
+
+    // Future: Add mobile menu toggle functionality
+    function toggleSidebar() {
+      const sidebar = document.querySelector('.sidebar');
+      sidebar.classList.toggle('active');
+    }
+  </script>
+
+  <style>
+    /* Additional specific styles for dashboard enhancements */
+    .nav-item span {
+      margin-right: 12px;
+      font-size: 16px;
+    }
+    
+    .activity-item {
+      cursor: pointer;
+    }
+    
+    .activity-item:hover .activity-text {
+      color: #9333ea;
+    }
+    
+    /* Mobile responsiveness enhancements */
+    @media (max-width: 768px) {
+      .stats-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      }
+      
+      .stat-number {
+        font-size: 28px;
+      }
+      
+      .btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
 </body>
 
 </html>
