@@ -1,10 +1,9 @@
-<!-- admin_users.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Admin - Registered Users</title>
-  <link rel="stylesheet" href="../static/advanced_styles_user.css">
+  <link rel="stylesheet" href="../static/styles.css">
 </head>
 <body>
 <div class="dashboard-container">
@@ -20,47 +19,123 @@
       <a href="admin_users.html" class="nav-item active"><span class="nav-text">Users</span></a>
       <a href="admin_search.html" class="nav-item"><span class="nav-text">Search</span></a>
       <a href="admin_summary.html" class="nav-item"><span class="nav-text">Summary</span></a>
-      <!-- <a href="admin_profile.html" class="nav-item"><span class="nav-text">Edit Profile</span></a> -->
     </nav>
   </aside>
   <main class="main-content">
     <div class="top-header">
       <div class="header-left">
         <h1>Registered Users</h1>
-        <div class="breadcrumb">Welcome to Admin / Users</div>
+        <div class="breadcrumb">Admin <span class="separator">•</span> Users Management</div>
       </div>
     </div>
+    
+    <!-- Statistics Cards -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-number">127</div>
+        <div class="stat-label">Total Users</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">45</div>
+        <div class="stat-label">Active Today</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">12</div>
+        <div class="stat-label">New This Week</div>
+      </div>
+    </div>
+
     <div class="card">
       <div class="card-header">
-        <h3 class="card-title">Registered Users</h3>
+        <h3 class="card-title">User Directory</h3>
       </div>
-      <table style="width: 100%; margin-top: 1rem; color: var(--text-primary);">
-        <thead>
-          <tr style="text-align: left;">
-            <th>ID</th>
-            <th>Email</th>
-            <th>Full Name</th>
-            <th>Address</th>
-            <th>Pin Code</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>abc@gmail.com</td>
-            <td>Zzzzzz</td>
-            <td>xxxxx</td>
-            <td>444444</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>xyz@gmail.com</td>
-            <td>Oooooo</td>
-            <td>xxxxx</td>
-            <td>222222</td>
-          </tr>
-        </tbody>
-      </table>
+      
+      <!-- Search Bar -->
+      <div style="margin-bottom: 25px;">
+        <input type="text" placeholder="Search users by name or email..." 
+               style="width: 100%; padding: 12px 16px; border: 1px solid rgba(147, 51, 234, 0.2); border-radius: 12px; font-size: 14px; background: rgba(255, 255, 255, 0.8); transition: all 0.3s ease;">
+      </div>
+      
+      <!-- Users Table -->
+      <div style="overflow-x: auto; border-radius: 12px; border: 1px solid rgba(147, 51, 234, 0.1);">
+        <table style="width: 100%; border-collapse: collapse; background: rgba(255, 255, 255, 0.95);">
+          <thead>
+            <tr style="background: linear-gradient(135deg, rgba(147, 51, 234, 0.1), rgba(79, 70, 229, 0.05)); border-bottom: 2px solid rgba(147, 51, 234, 0.2);">
+              <th style="padding: 16px; text-align: left; font-weight: 600; color: #1e293b; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px;">ID</th>
+              <th style="padding: 16px; text-align: left; font-weight: 600; color: #1e293b; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px;">Email</th>
+              <th style="padding: 16px; text-align: left; font-weight: 600; color: #1e293b; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px;">Full Name</th>
+              <th style="padding: 16px; text-align: left; font-weight: 600; color: #1e293b; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px;">Address</th>
+              <th style="padding: 16px; text-align: left; font-weight: 600; color: #1e293b; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px;">Pin Code</th>
+              <th style="padding: 16px; text-align: left; font-weight: 600; color: #1e293b; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px;">Status</th>
+              <th style="padding: 16px; text-align: left; font-weight: 600; color: #1e293b; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px;">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom: 1px solid rgba(147, 51, 234, 0.1); transition: all 0.3s ease;" onmouseover="this.style.background='rgba(147, 51, 234, 0.05)'" onmouseout="this.style.background='transparent'">
+              <td style="padding: 16px; color: #334155; font-weight: 500;">#001</td>
+              <td style="padding: 16px; color: #334155;">abc@gmail.com</td>
+              <td style="padding: 16px; color: #334155; font-weight: 500;">Alex Johnson</td>
+              <td style="padding: 16px; color: #64748b;">123 Main Street, Downtown</td>
+              <td style="padding: 16px; color: #64748b;">444444</td>
+              <td style="padding: 16px;">
+                <span class="activity-status in" style="font-size: 10px; padding: 4px 8px;">Active</span>
+              </td>
+              <td style="padding: 16px;">
+                <div style="display: flex; gap: 8px;">
+                  <button class="btn btn-secondary" style="padding: 6px 12px; font-size: 12px;">View</button>
+                  <button class="btn btn-secondary" style="padding: 6px 12px; font-size: 12px;">Edit</button>
+                </div>
+              </td>
+            </tr>
+            <tr style="border-bottom: 1px solid rgba(147, 51, 234, 0.1); transition: all 0.3s ease;" onmouseover="this.style.background='rgba(147, 51, 234, 0.05)'" onmouseout="this.style.background='transparent'">
+              <td style="padding: 16px; color: #334155; font-weight: 500;">#002</td>
+              <td style="padding: 16px; color: #334155;">xyz@gmail.com</td>
+              <td style="padding: 16px; color: #334155; font-weight: 500;">Sarah Miller</td>
+              <td style="padding: 16px; color: #64748b;">456 Oak Avenue, Suburbs</td>
+              <td style="padding: 16px; color: #64748b;">222222</td>
+              <td style="padding: 16px;">
+                <span class="activity-status out" style="font-size: 10px; padding: 4px 8px;">Inactive</span>
+              </td>
+              <td style="padding: 16px;">
+                <div style="display: flex; gap: 8px;">
+                  <button class="btn btn-secondary" style="padding: 6px 12px; font-size: 12px;">View</button>
+                  <button class="btn btn-secondary" style="padding: 6px 12px; font-size: 12px;">Edit</button>
+                </div>
+              </td>
+            </tr>
+            <tr style="border-bottom: 1px solid rgba(147, 51, 234, 0.1); transition: all 0.3s ease;" onmouseover="this.style.background='rgba(147, 51, 234, 0.05)'" onmouseout="this.style.background='transparent'">
+              <td style="padding: 16px; color: #334155; font-weight: 500;">#003</td>
+              <td style="padding: 16px; color: #334155;">mike.davis@email.com</td>
+              <td style="padding: 16px; color: #334155; font-weight: 500;">Mike Davis</td>
+              <td style="padding: 16px; color: #64748b;">789 Pine Road, Uptown</td>
+              <td style="padding: 16px; color: #64748b;">555555</td>
+              <td style="padding: 16px;">
+                <span class="activity-status in" style="font-size: 10px; padding: 4px 8px;">Active</span>
+              </td>
+              <td style="padding: 16px;">
+                <div style="display: flex; gap: 8px;">
+                  <button class="btn btn-secondary" style="padding: 6px 12px; font-size: 12px;">View</button>
+                  <button class="btn btn-secondary" style="padding: 6px 12px; font-size: 12px;">Edit</button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <!-- Pagination -->
+      <div style="margin-top: 25px; display: flex; justify-content: space-between; align-items: center;">
+        <div style="color: #64748b; font-size: 14px;">
+          Showing 1 to 3 of 127 users
+        </div>
+        <div style="display: flex; gap: 8px;">
+          <button class="btn btn-secondary" style="padding: 8px 12px; font-size: 12px;">Previous</button>
+          <button class="btn btn-primary" style="padding: 8px 12px; font-size: 12px;">1</button>
+          <button class="btn btn-secondary" style="padding: 8px 12px; font-size: 12px;">2</button>
+          <button class="btn btn-secondary" style="padding: 8px 12px; font-size: 12px;">3</button>
+          <button class="btn btn-secondary" style="padding: 8px 12px; font-size: 12px;">Next</button>
+        </div>
+      </div>
     </div>
   </main>
 </div>

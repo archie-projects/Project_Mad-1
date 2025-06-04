@@ -1,4 +1,3 @@
-<!-- admin_dashboard.html -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,118 +5,150 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Dashboard</title>
-  <link rel="stylesheet" href="../static/advanced_styles_user.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../static/styles.css">
   <style>
-    /* Glow hover effects */
+    /* Additional styles for parking lot visualization */
+    .lots-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+    
     .lot-card {
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 10px 40px rgba(147, 51, 234, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      transition: all 0.3s ease;
       position: relative;
       overflow: hidden;
     }
     
-    .lot-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 
-        0 20px 40px rgba(0, 0, 0, 0.1),
-        0 0 30px rgba(59, 130, 246, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(59, 130, 246, 0.3);
-    }
-    
-    .lot-card:hover::before {
+    .lot-card::before {
       content: '';
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
-      bottom: 0;
-      background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(139, 92, 246, 0.05));
-      pointer-events: none;
+      height: 4px;
+      background: linear-gradient(135deg, #9333ea, #4f46e5, #ec4899);
     }
     
-    .btn-primary, .btn-secondary {
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      position: relative;
-      overflow: hidden;
+    .lot-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 60px rgba(147, 51, 234, 0.2);
+      border-color: rgba(147, 51, 234, 0.3);
     }
     
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 
-        0 10px 25px rgba(59, 130, 246, 0.4),
-        0 0 20px rgba(59, 130, 246, 0.3);
-      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    .lot-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 25px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(147, 51, 234, 0.1);
     }
     
-    .btn-secondary:hover {
-      transform: translateY(-2px);
-      box-shadow: 
-        0 8px 20px rgba(0, 0, 0, 0.15),
-        0 0 15px rgba(107, 114, 128, 0.3);
-      background: linear-gradient(135deg, #f8fafc, #e2e8f0);
-      border-color: rgba(59, 130, 246, 0.4);
+    .lot-name {
+      font-size: 20px;
+      font-weight: 600;
+      color: #1e293b;
+      margin-bottom: 8px;
+    }
+    
+    .lot-address {
+      color: #64748b;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    
+    .lot-status {
+      display: flex;
+      gap: 10px;
+    }
+    
+    .parking-visual {
+      margin-top: 20px;
+    }
+    
+    .parking-row {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
     }
     
     .parking-spot {
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 14px;
+      color: white;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      position: relative;
+    }
+    
+    .parking-spot.occupied {
+      background: linear-gradient(135deg, #ef4444, #dc2626);
+      box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+      animation: subtle-pulse 3s ease-in-out infinite;
+    }
+    
+    .parking-spot.available {
+      background: linear-gradient(135deg, #10b981, #059669);
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
     }
     
     .parking-spot:hover {
       transform: scale(1.1);
       z-index: 10;
-      position: relative;
     }
     
     .parking-spot.occupied:hover {
-      box-shadow: 0 0 15px rgba(239, 68, 68, 0.6);
-      background: linear-gradient(135deg, #ef4444, #dc2626);
+      box-shadow: 0 0 20px rgba(239, 68, 68, 0.6);
     }
     
     .parking-spot.available:hover {
-      box-shadow: 0 0 15px rgba(34, 197, 94, 0.6);
-      background: linear-gradient(135deg, #22c55e, #16a34a);
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.6);
     }
     
-    .nav-item {
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    
-    .nav-item:hover {
-      background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
-      border-left: 3px solid #3b82f6;
-      box-shadow: inset 0 0 20px rgba(59, 130, 246, 0.1);
-      transform: translateX(5px);
-    }
-    
-    .nav-item.active {
-      background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(139, 92, 246, 0.15));
-      border-left: 3px solid #3b82f6;
-      box-shadow: inset 0 0 25px rgba(59, 130, 246, 0.2);
-    }
-    
-    /* Subtle glow animation for occupied spots */
     @keyframes subtle-pulse {
       0%, 100% { 
-        box-shadow: 0 0 5px rgba(239, 68, 68, 0.3); 
+        box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3); 
       }
       50% { 
-        box-shadow: 0 0 10px rgba(239, 68, 68, 0.5); 
+        box-shadow: 0 4px 20px rgba(239, 68, 68, 0.5); 
       }
     }
     
-    .parking-spot.occupied {
-      animation: subtle-pulse 3s ease-in-out infinite;
+    /* Header button alignment */
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 15px;
     }
     
-    /* Header glow effect */
-    .top-header h1 {
-      transition: all 0.3s ease;
+    .top-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 40px;
+      padding: 20px 0;
     }
     
-    .top-header:hover h1 {
-      text-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+    /* Add lot button container */
+    .add-lot-container {
+      text-align: center;
+      margin-top: 40px;
+      padding: 30px;
     }
   </style>
 </head>
@@ -132,31 +163,34 @@
         </div>
       </div>
       <nav class="nav-menu">
-        <a href="admin_dashboard.html" class="nav-item active"><span class="nav-text">Dashboard</span></a>
-        <a href="admin_users.html" class="nav-item"><span class="nav-text">Users</span></a>
-        <a href="admin_search.html" class="nav-item"><span class="nav-text">Search</span></a>
-        <a href="admin_summary.html" class="nav-item"><span class="nav-text">Summary</span></a>
-        <!-- <a href="admin_profile.html" class="nav-item"><span class="nav-text">Edit Profile</span></a> -->
+        <a href="admin_dashboard.html" class="nav-item active">Dashboard</a>
+        <a href="admin_users.html" class="nav-item">Users</a>
+        <a href="admin_search.html" class="nav-item">Search</a>
+        <a href="admin_summary.html" class="nav-item">Summary</a>
       </nav>
     </aside>
+    
     <main class="main-content">
       <div class="top-header">
         <div class="header-left">
           <h1>Admin Dashboard</h1>
-          <div class="breadcrumb">Welcome to Admin</div>
+          <div class="breadcrumb">Admin <span class="separator">›</span> Dashboard</div>
         </div>
-        <a href="admin_profile.html" class="btn-secondary">Edit Profile</a>
+        <div class="header-actions">
+          <a href="admin_profile.html" class="btn btn-secondary">Edit Profile</a>
+        </div>
       </div>
+      
       <div class="lots-grid">
-        <div class="lot-card">
+        <div class="lot-card fade-in-up">
           <div class="lot-header">
             <div>
-              <h3 class="lot-name">Parking#1</h3>
-              <div class="lot-address">Occupied: 3 / 15</div>
+              <h3 class="lot-name">Parking Lot #1</h3>
+              <div class="lot-address">Occupied: 3 / 15 spots</div>
             </div>
-            <div class="lot-status low-occupancy">
-              <button class="btn-secondary">Edit</button>
-              <button class="btn-secondary">Delete</button>
+            <div class="lot-status">
+              <button class="btn btn-secondary">Edit</button>
+              <button class="btn btn-secondary">Delete</button>
             </div>
           </div>
           <div class="parking-visual">
@@ -166,18 +200,26 @@
               <div class="parking-spot available">3</div>
               <div class="parking-spot available">4</div>
               <div class="parking-spot available">5</div>
+            </div>
+            <div class="parking-row" style="margin-top: 10px;">
+              <div class="parking-spot occupied">6</div>
+              <div class="parking-spot available">7</div>
+              <div class="parking-spot available">8</div>
+              <div class="parking-spot available">9</div>
+              <div class="parking-spot available">10</div>
             </div>
           </div>
         </div>
-        <div class="lot-card">
+        
+        <div class="lot-card fade-in-up">
           <div class="lot-header">
             <div>
-              <h3 class="lot-name">Parking#2</h3>
-              <div class="lot-address">Occupied: 4 / 10</div>
+              <h3 class="lot-name">Parking Lot #2</h3>
+              <div class="lot-address">Occupied: 4 / 10 spots</div>
             </div>
-            <div class="lot-status medium-occupancy">
-              <button class="btn-secondary">Edit</button>
-              <button class="btn-secondary">Delete</button>
+            <div class="lot-status">
+              <button class="btn btn-secondary">Edit</button>
+              <button class="btn btn-secondary">Delete</button>
             </div>
           </div>
           <div class="parking-visual">
@@ -187,12 +229,20 @@
               <div class="parking-spot available">3</div>
               <div class="parking-spot available">4</div>
               <div class="parking-spot available">5</div>
+            </div>
+            <div class="parking-row" style="margin-top: 10px;">
+              <div class="parking-spot occupied">6</div>
+              <div class="parking-spot occupied">7</div>
+              <div class="parking-spot available">8</div>
+              <div class="parking-spot available">9</div>
+              <div class="parking-spot available">10</div>
             </div>
           </div>
         </div>
       </div>
-      <div style="text-align:center; margin-top: 2rem;">
-        <a href="admin_add_lot.html" class="btn-primary">+ Add Lot</a>
+      
+      <div class="add-lot-container">
+        <a href="admin_add_lot.html" class="btn btn-primary">+ Add New Parking Lot</a>
       </div>
     </main>
   </div>

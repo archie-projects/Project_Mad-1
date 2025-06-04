@@ -1,10 +1,9 @@
-<!-- admin_view_spot.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>View/Delete Parking Spot</title>
-  <link rel="stylesheet" href="../static/advanced_styles_user.css">
+  <link rel="stylesheet" href="../static/styles.css">
 </head>
 <body>
 <div class="dashboard-container">
@@ -18,25 +17,205 @@
     <nav class="nav-menu">
       <a href="admin_dashboard.html" class="nav-item"><span class="nav-text">Dashboard</span></a>
       <a href="admin_users.html" class="nav-item"><span class="nav-text">Users</span></a>
-      <a href="admin_search.html" class="nav-item"><span class="nav-text">Search</span></a>
+      <a href="admin_search.html" class="nav-item active"><span class="nav-text">Search</span></a>
       <a href="admin_summary.html" class="nav-item"><span class="nav-text">Summary</span></a>
-      <!-- <a href="admin_profile.html" class="nav-item"><span class="nav-text">Edit Profile</span></a> -->
     </nav>
   </aside>
   <main class="main-content">
     <div class="top-header">
-      <h1>View/Delete Parking Spot</h1>
-      <div class="breadcrumb">Admin / View/Delete Spot</div>
+      <div class="header-left">
+        <h1>Parking Spot Management</h1>
+        <div class="breadcrumb">Admin <span class="separator">•</span> View/Delete Spot</div>
+      </div>
     </div>
+    
+    <!-- Statistics Cards -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-number">250</div>
+        <div class="stat-label">Total Spots</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">85</div>
+        <div class="stat-label">Occupied</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">165</div>
+        <div class="stat-label">Available</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">5</div>
+        <div class="stat-label">Maintenance</div>
+      </div>
+    </div>
+
+    <!-- Search Section -->
     <div class="card">
-      <form class="form-grid">
-        <input class="search-input" type="text" placeholder="Spot ID" value="A7">
-        <input class="search-input" type="text" placeholder="Status" value="0">
-        <div style="display: flex; gap: 1rem;">
-          <button class="btn-danger" type="submit">Delete</button>
-          <button class="btn-secondary" type="reset">Cancel</button>
+      <div class="card-header">
+        <h3 class="card-title">Find Parking Spot</h3>
+      </div>
+      <form style="display: grid; gap: 20px;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+          <div>
+            <label style="display: block; margin-bottom: 8px; font-weight: 500; color: #334155; font-size: 14px;">Spot ID</label>
+            <input type="text" placeholder="Enter Spot ID (e.g., A7)" value="A7" 
+                   style="width: 100%; padding: 12px 16px; border: 1px solid rgba(147, 51, 234, 0.2); border-radius: 12px; font-size: 14px; background: rgba(255, 255, 255, 0.8); transition: all 0.3s ease;">
+          </div>
+          <div>
+            <label style="display: block; margin-bottom: 8px; font-weight: 500; color: #334155; font-size: 14px;">Floor Level</label>
+            <select style="width: 100%; padding: 12px 16px; border: 1px solid rgba(147, 51, 234, 0.2); border-radius: 12px; font-size: 14px; background: rgba(255, 255, 255, 0.8); transition: all 0.3s ease;">
+              <option value="">Select Floor</option>
+              <option value="ground">Ground Floor</option>
+              <option value="first">First Floor</option>
+              <option value="second">Second Floor</option>
+            </select>
+          </div>
+        </div>
+        <div style="display: flex; gap: 15px; justify-content: flex-start;">
+          <button type="submit" class="btn btn-primary">
+            🔍 Search Spot
+          </button>
+          <button type="reset" class="btn btn-secondary">
+            🔄 Clear Search
+          </button>
         </div>
       </form>
+    </div>
+
+    <!-- Spot Details Section -->
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">Spot Details - A7</h3>
+      </div>
+      
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; margin-bottom: 30px;">
+        <div class="activity-item" style="flex-direction: column; align-items: flex-start; padding: 20px;">
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 10px;">
+            <div class="activity-icon vehicle-out">
+              <span style="position: relative; z-index: 1;">🚗</span>
+            </div>
+            <div>
+              <div class="activity-text">Spot Status</div>
+              <div class="activity-meta">Current Availability</div>
+            </div>
+          </div>
+          <span class="activity-status out">Occupied</span>
+        </div>
+        
+        <div class="activity-item" style="flex-direction: column; align-items: flex-start; padding: 20px;">
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 10px;">
+            <div class="activity-icon vehicle-in">
+              <span style="position: relative; z-index: 1;">📍</span>
+            </div>
+            <div>
+              <div class="activity-text">Location</div>
+              <div class="activity-meta">Floor & Section</div>
+            </div>
+          </div>
+          <div style="color: #334155; font-weight: 500;">Ground Floor, Section A</div>
+        </div>
+        
+        <div class="activity-item" style="flex-direction: column; align-items: flex-start; padding: 20px;">
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 10px;">
+            <div class="activity-icon" style="background: linear-gradient(135deg, rgba(236, 72, 153, 0.15), rgba(219, 39, 119, 0.1)); border: 1px solid rgba(236, 72, 153, 0.2);">
+              <span style="position: relative; z-index: 1;">⏰</span>
+            </div>
+            <div>
+              <div class="activity-text">Last Updated</div>
+              <div class="activity-meta">Timestamp</div>
+            </div>
+          </div>
+          <div style="color: #334155; font-weight: 500;">2 hours ago</div>
+        </div>
+      </div>
+
+      <!-- Vehicle Information -->
+      <div style="background: linear-gradient(135deg, rgba(147, 51, 234, 0.05), rgba(79, 70, 229, 0.03)); border: 1px solid rgba(147, 51, 234, 0.1); border-radius: 16px; padding: 20px; margin-bottom: 25px;">
+        <h4 style="color: #1e293b; font-weight: 600; margin-bottom: 15px; display: flex; align-items: center; gap: 8px;">
+          🚙 Vehicle Information
+        </h4>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+          <div>
+            <span style="color: #64748b; font-size: 14px;">License Plate:</span>
+            <div style="color: #334155; font-weight: 500;">ABC-1234</div>
+          </div>
+          <div>
+            <span style="color: #64748b; font-size: 14px;">Vehicle Type:</span>
+            <div style="color: #334155; font-weight: 500;">Sedan</div>
+          </div>
+          <div>
+            <span style="color: #64748b; font-size: 14px;">Entry Time:</span>
+            <div style="color: #334155; font-weight: 500;">14:30 PM</div>
+          </div>
+          <div>
+            <span style="color: #64748b; font-size: 14px;">Duration:</span>
+            <div style="color: #334155; font-weight: 500;">2h 15m</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div style="display: flex; gap: 15px; justify-content: flex-start; flex-wrap: wrap;">
+        <button class="btn btn-primary">
+          📝 Edit Spot
+        </button>
+        <button class="btn btn-secondary">
+          🔄 Mark Available
+        </button>
+        <button style="background: linear-gradient(135deg, #f59e0b, #d97706); color: white; box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3); padding: 12px 24px; border-radius: 12px; font-weight: 600; border: none; cursor: pointer; font-size: 14px; transition: all 0.3s ease;" 
+                onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 25px rgba(245, 158, 11, 0.4)'"
+                onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(245, 158, 11, 0.3)'">
+          🚧 Maintenance Mode
+        </button>
+        <button style="background: linear-gradient(135deg, #ef4444, #dc2626); color: white; box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3); padding: 12px 24px; border-radius: 12px; font-weight: 600; border: none; cursor: pointer; font-size: 14px; transition: all 0.3s ease;" 
+                onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 25px rgba(239, 68, 68, 0.4)'"
+                onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(239, 68, 68, 0.3)'">
+          🗑️ Delete Spot
+        </button>
+      </div>
+    </div>
+
+    <!-- Recent Activity -->
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">Recent Activity - Spot A7</h3>
+      </div>
+      <div class="activity-list">
+        <div class="activity-item vehicle-out">
+          <div class="activity-icon vehicle-out">
+            <span style="position: relative; z-index: 1;">🚗</span>
+          </div>
+          <div class="activity-details">
+            <div class="activity-text">Vehicle Parked</div>
+            <div class="activity-meta">License: ABC-1234 • 2 hours ago</div>
+          </div>
+          <div class="activity-status out">Occupied</div>
+        </div>
+        
+        <div class="activity-item vehicle-in">
+          <div class="activity-icon vehicle-in">
+            <span style="position: relative; z-index: 1;">🚙</span>
+          </div>
+          <div class="activity-details">
+            <div class="activity-text">Vehicle Departed</div>
+            <div class="activity-meta">License: XYZ-9876 • 3 hours ago</div>
+          </div>
+          <div class="activity-status in">Available</div>
+        </div>
+        
+        <div class="activity-item">
+          <div class="activity-icon" style="background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(217, 119, 6, 0.1)); border: 1px solid rgba(245, 158, 11, 0.2);">
+            <span style="position: relative; z-index: 1;">🔧</span>
+          </div>
+          <div class="activity-details">
+            <div class="activity-text">Maintenance Completed</div>
+            <div class="activity-meta">Routine cleaning and inspection • 1 day ago</div>
+          </div>
+          <div style="padding: 8px 16px; border-radius: 20px; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; background: linear-gradient(135deg, #f59e0b, #d97706); color: white; box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);">
+            Maintenance
+          </div>
+        </div>
+      </div>
     </div>
   </main>
 </div>
