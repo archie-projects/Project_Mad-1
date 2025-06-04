@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Welcome Back</title>
+    <title>Register - Join Us Today</title>
     <style>
         * {
             margin: 0;
@@ -13,8 +13,8 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            height: 100vh;
-            overflow: hidden;
+            min-height: 100vh;
+            overflow-x: hidden;
             position: relative;
         }
 
@@ -69,9 +69,9 @@
             width: 100%;
             height: 100%;
             background: linear-gradient(135deg, 
-                rgba(147, 51, 234, 0.6), 
-                rgba(79, 70, 229, 0.5),
-                rgba(236, 72, 153, 0.4)
+                rgba(147, 51, 234, 0.8), 
+                rgba(79, 70, 229, 0.7),
+                rgba(236, 72, 153, 0.6)
             );
             z-index: -1;
         }
@@ -82,20 +82,21 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            padding: 20px;
+            padding: 40px 20px;
         }
 
-        /* Login Card */
-        .login-card {
+        /* Registration Card */
+        .register-card {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
             border-radius: 24px;
             padding: 40px;
             width: 100%;
-            max-width: 400px;
+            max-width: 500px;
             box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
             border: 1px solid rgba(255, 255, 255, 0.3);
             animation: slideUp 0.8s ease-out;
+            margin: 20px 0;
         }
 
         @keyframes slideUp {
@@ -110,12 +111,12 @@
         }
 
         /* Header */
-        .login-header {
+        .register-header {
             text-align: center;
             margin-bottom: 30px;
         }
 
-        .login-title {
+        .register-title {
             font-size: 28px;
             font-weight: 700;
             background: linear-gradient(135deg, #9333ea, #4f46e5, #ec4899);
@@ -125,21 +126,32 @@
             margin-bottom: 8px;
         }
 
-        .login-subtitle {
+        .register-subtitle {
             color: #6b7280;
             font-size: 16px;
             font-weight: 400;
         }
 
         /* Form */
-        .login-form {
+        .register-form {
             display: flex;
             flex-direction: column;
             gap: 20px;
         }
 
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+
         .form-group {
             position: relative;
+            flex: 1;
+        }
+
+        .form-group.full-width {
+            flex: none;
+            width: 100%;
         }
 
         .form-input {
@@ -163,8 +175,13 @@
             color: #9ca3af;
         }
 
-        /* Login Button */
-        .login-btn {
+        .form-input.error {
+            border-color: #ef4444;
+            box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.1);
+        }
+
+        /* Register Button */
+        .register-btn {
             width: 100%;
             padding: 16px;
             background: linear-gradient(135deg, #9333ea, #4f46e5);
@@ -177,31 +194,38 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            margin-top: 10px;
         }
 
-        .login-btn:hover {
+        .register-btn:hover:not(:disabled) {
             transform: translateY(-2px);
             box-shadow: 0 10px 25px rgba(147, 51, 234, 0.3);
         }
 
-        .login-btn:active {
+        .register-btn:active:not(:disabled) {
             transform: translateY(0);
         }
 
-        /* Forgot Password */
-        .forgot-password {
-            text-align: center;
-            margin-top: 20px;
+        .register-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
         }
 
-        .forgot-password a {
+        /* Login Link */
+        .login-link {
+            text-align: center;
+            margin-top: 20px;
+            color: #6b7280;
+        }
+
+        .login-link a {
             color: #9333ea;
             text-decoration: none;
             font-weight: 500;
             transition: color 0.3s ease;
         }
 
-        .forgot-password a:hover {
+        .login-link a:hover {
             color: #7c3aed;
         }
 
@@ -209,7 +233,7 @@
         .divider {
             display: flex;
             align-items: center;
-            margin: 30px 0;
+            margin: 30px 0 20px 0;
             color: #9ca3af;
             font-size: 14px;
         }
@@ -226,8 +250,8 @@
             padding: 0 15px;
         }
 
-        /* Social Login */
-        .social-login {
+        /* Social Register */
+        .social-register {
             display: flex;
             gap: 12px;
         }
@@ -278,19 +302,30 @@
         }
 
         /* Responsive */
-        @media (max-width: 480px) {
-            .login-card {
+        @media (max-width: 640px) {
+            .form-row {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .register-card {
                 padding: 30px 20px;
-                margin: 20px;
+                margin: 20px 10px;
                 border-radius: 20px;
             }
 
-            .login-title {
+            .register-title {
                 font-size: 24px;
             }
 
-            .social-login {
+            .social-register {
                 flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px 10px;
             }
         }
     </style>
@@ -309,41 +344,73 @@
 
     <!-- Main Container -->
     <div class="container">
-        <div class="login-card">
-            <div class="login-header">
-                <h1 class="login-title">Welcome Back</h1>
-                <p class="login-subtitle">Sign in to your account</p>
+        <div class="register-card">
+            <div class="register-header">
+                <h1 class="register-title">Create Account</h1>
+                <p class="register-subtitle">Join us and start your journey</p>
             </div>
 
-            <form class="login-form" onsubmit="handleLogin(event)">
-                <div class="form-group">
-                    <input type="username" class="form-input" placeholder="Username" required>
+            <form class="register-form" method="POST" action="{{ url_for('register') }}">
+                <div class="form-group full-width">
+                    <input type="text" name="username" class="form-input" placeholder="Username" required 
+                          minlength="3" maxlength="80">
                 </div>
 
-                <div class="form-group">
-                    <input type="password" class="form-input" placeholder="Password" required>
+                <div class="form-group full-width">
+                    <input type="email" name="email" class="form-input" placeholder="Email Address" required 
+                          maxlength="120">
                 </div>
 
-                <button type="submit" class="login-btn">
-                    Sign In
+                <div class="form-group full-width">
+                  <input type="tel" name="phone_no" class="form-input" placeholder="Phone No. (10 digits)" required 
+                        pattern="[0-9]{10}" maxlength="10">
+                </div>
+
+                <div class="form-group full-width">
+                    <input type="text" name="address" class="form-input" placeholder="Full Address" required 
+                          maxlength="200">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <input type="text" name="pincode" class="form-input" placeholder="PIN Code" required 
+                              pattern="[0-9]{6}" maxlength="6">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="vehicle_no" class="form-input" placeholder="Vehicle Number" required 
+                              maxlength="20" style="text-transform: uppercase;">
+                    </div>
+                </div>
+
+                <div class="form-group full-width">
+                    <input type="password" name="password" class="form-input" placeholder="Create Password" required 
+                          minlength="8" maxlength="120">
+                </div>
+
+                <div class="form-group full-width">
+                    <input type="password" name="confirm_password" class="form-input" placeholder="Confirm Password" required>
+                </div>
+
+                <button type="submit" class="register-btn">
+                    Create Account
                 </button>
             </form>
 
-            <div class="forgot-password">
-                <a href="#">Forgot your password?</a>
+            <div class="login-link">
+                Already have an account? <a href="{{ url_for('login') }}">Sign In</a>
             </div>
 
             <div class="divider">
-                <span>Or continue with</span>
+                <span>Or register with</span>
             </div>
 
-            <div class="social-login">
-                <button class="social-btn" onclick="socialLogin('google')">
+            <div class="social-register">
+                <a href="{{ url_for(/auth/google) }}" class="social-btn">
                     📧 Google
-                </button>
-                <button class="social-btn" onclick="socialLogin('github')">
+                </a>
+                <a href="{{ url_for(/auth/github) }}" class="social-btn">
                     🔗 GitHub
-                </button>
+                </a>
             </div>
         </div>
     </div>
@@ -357,20 +424,17 @@
     </div>
 
     <script>
+        // SLIDESHOW FUNCTIONALITY ONLY
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
         const indicators = document.querySelectorAll('.indicator');
         const totalSlides = slides.length;
 
         function showSlide(index) {
-            // Remove active class from all slides and indicators
             slides.forEach(slide => slide.classList.remove('active'));
             indicators.forEach(indicator => indicator.classList.remove('active'));
-
-            // Add active class to current slide and indicator
             slides[index].classList.add('active');
             indicators[index].classList.add('active');
-
             currentSlide = index;
         }
 
@@ -387,43 +451,22 @@
         let slideInterval = setInterval(nextSlide, 5000);
 
         // Pause slideshow on hover
-        const loginCard = document.querySelector('.login-card');
-        loginCard.addEventListener('mouseenter', () => {
+        const registerCard = document.querySelector('.register-card');
+        registerCard.addEventListener('mouseenter', () => {
             clearInterval(slideInterval);
         });
 
-        loginCard.addEventListener('mouseleave', () => {
+        registerCard.addEventListener('mouseleave', () => {
             slideInterval = setInterval(nextSlide, 5000);
         });
 
-        // Form handling
-        function handleLogin(event) {
-            event.preventDefault();
-            const email = event.target.querySelector('input[type="email"]').value;
-            const password = event.target.querySelector('input[type="password"]').value;
-            
-            // Add your login logic here
-            console.log('Login attempt:', { email, password });
-            
-            // Show success animation
-            const btn = event.target.querySelector('.login-btn');
-            btn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
-            btn.textContent = '✓ Signing In...';
-            
-            // Reset after 2 seconds (remove this in production)
-            setTimeout(() => {
-                btn.style.background = 'linear-gradient(135deg, #9333ea, #4f46e5)';
-                btn.textContent = 'Sign In';
-            }, 2000);
-        }
-
-        function socialLogin(provider) {
-            console.log(`${provider} login clicked`);
-            // Add your social login logic here
-        }
-
-        // Initialize
+        // Initialize slideshow
         showSlide(0);
+
+        // Auto-format vehicle number input to uppercase
+        document.querySelector('input[name="vehicle_no"]').addEventListener('input', function(e) {
+            this.value = this.value.toUpperCase();
+        });
     </script>
 </body>
 </html>

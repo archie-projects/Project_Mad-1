@@ -10,22 +10,29 @@
 
 <body>
   <div class="dashboard-container">
-
     <!-- Sidebar -->
     <aside class="sidebar">
       <div class="sidebar-header">
         <div class="logo">
           <div class="logo-icon">🅿️</div>
-          <div class="logo-text">ParkSmart</div>
+          <div class="logo-text">ParkNGo</div>
         </div>
       </div>
       <nav class="nav-menu">
-        <a href="user_dashboard.html" class="nav-item">Dashboard</a>
-        <a href="user_search_parking.html" class="nav-item active">Search Parking</a>
-        <a href="user_summary.html" class="nav-item">Summary</a>
-        <a href="user_edit_profile.html" class="nav-item">Edit Profile</a>
-        <a href="user_logout.html" class="nav-item">Logout</a>
+        <a href="{{ url_for('dashboard') }}" class="nav-item active">
+          <span>🏠</span> Dashboard
+        </a>
+        <a href="{{ url_for('search_parking') }}" class="nav-item">
+          <span>🔍</span> Search Parking
+        </a>
+        <a href="{{ url_for('profile') }}" class="nav-item">
+          <span>👤</span> Edit Profile
+        </a>
+        <a href="{{ url_for('logout') }}" class="nav-item">
+          <span>🚪</span> Logout
+        </a>
       </nav>
+      
     </aside>
 
     <!-- Main Content -->

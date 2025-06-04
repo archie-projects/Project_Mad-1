@@ -1,5 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from flask_login import UserMixin
+
 
 app = Flask(__name__)
 
@@ -7,7 +9,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///sqlite3.db'
 
 db=SQLAlchemy(app)
 
-class User(db.Model):
+class User(db.Model, UserMixin):
   id = db.Column(db.Integer, primary_key=True)
   username = db.Column(db.String(80), unique=True, nullable=False)
   email = db.Column(db.String(120), unique=True, nullable=False)
@@ -16,6 +18,7 @@ class User(db.Model):
   password = db.Column(db.String(120), nullable=False)
   reservations = db.relationship('Reservation', backref='user')
   vehicle_no = db.Column(db.String(20), nullable=False)
+  
 
 class Reservation(db.Model):
   id = db.Column(db.Integer, primary_key=True)
@@ -39,7 +42,7 @@ class ParkingSpot(db.Model):
   spot_number = db.Column(db.String(20), nullable=False)
   status = db.Column(db.String(20), nullable=False, default='available')  # available, reserved, occupied
 
-class Admin(db.Model):
+class Admin(db.Model, UserMixin):
   id = db.Column(db.Integer, primary_key=True)
   username = db.Column(db.String(80), unique=True, nullable=False)
   password = db.Column(db.String(120), nullable=False)

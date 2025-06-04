@@ -180,34 +180,6 @@
             box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.1);
         }
 
-        /* Password Strength Indicator */
-        .password-strength {
-            margin-top: 8px;
-            height: 4px;
-            border-radius: 2px;
-            background: #e5e7eb;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .password-strength-bar {
-            height: 100%;
-            border-radius: 2px;
-            transition: all 0.3s ease;
-            width: 0%;
-        }
-
-        .strength-weak { background: #ef4444; width: 25%; }
-        .strength-fair { background: #f59e0b; width: 50%; }
-        .strength-good { background: #10b981; width: 75%; }
-        .strength-strong { background: #059669; width: 100%; }
-
-        .password-text {
-            font-size: 12px;
-            margin-top: 4px;
-            color: #6b7280;
-        }
-
         /* Register Button */
         .register-btn {
             width: 100%;
@@ -329,21 +301,6 @@
             transform: scale(1.2);
         }
 
-        /* Loading Animation */
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 2px solid #ffffff;
-            border-radius: 50%;
-            border-top-color: transparent;
-            animation: spin 1s ease-in-out infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
         /* Responsive */
         @media (max-width: 640px) {
             .form-row {
@@ -393,55 +350,54 @@
                 <p class="register-subtitle">Join us and start your journey</p>
             </div>
 
-            <form class="register-form" onsubmit="handleRegister(event)">
-                <div class="form-row">
-                    <div class="form-group">
-                        <input type="text" name="username" class="form-input" placeholder="Username" required 
-                               minlength="3" maxlength="80" onblur="validateUsername(this)">
-                    </div>
-                    <div class="form-group">
-                        <input type="email" name="email" class="form-input" placeholder="Email Address" required 
-                               maxlength="120" onblur="validateEmail(this)">
-                    </div>
+            <form class="register-form" method="POST" action="/register">
+                <div class="form-group full-width">
+                    <input type="text" name="username" class="form-input" placeholder="Username" required 
+                          minlength="3" maxlength="80">
+                </div>
+
+                <div class="form-group full-width">
+                    <input type="email" name="email" class="form-input" placeholder="Email Address" required 
+                          maxlength="120">
+                </div>
+
+                <div class="form-group full-width">
+                  <input type="tel" name="phone_no" class="form-input" placeholder="Phone No. (10 digits)" required 
+                        pattern="[0-9]{10}" maxlength="10">
                 </div>
 
                 <div class="form-group full-width">
                     <input type="text" name="address" class="form-input" placeholder="Full Address" required 
-                           maxlength="200">
+                          maxlength="200">
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
-                        <input type="number" name="pincode" class="form-input" placeholder="PIN Code" required 
-                               min="100000" max="999999" onblur="validatePincode(this)">
+                        <input type="text" name="pincode" class="form-input" placeholder="PIN Code" required 
+                              pattern="[0-9]{6}" maxlength="6">
                     </div>
                     <div class="form-group">
                         <input type="text" name="vehicle_no" class="form-input" placeholder="Vehicle Number" required 
-                               maxlength="20" style="text-transform: uppercase;" onblur="validateVehicleNo(this)">
+                              maxlength="20" style="text-transform: uppercase;">
                     </div>
                 </div>
 
                 <div class="form-group full-width">
                     <input type="password" name="password" class="form-input" placeholder="Create Password" required 
-                           minlength="8" maxlength="120" oninput="checkPasswordStrength(this)">
-                    <div class="password-strength">
-                        <div class="password-strength-bar" id="strengthBar"></div>
-                    </div>
-                    <div class="password-text" id="strengthText">Password strength will appear here</div>
+                          minlength="8" maxlength="120">
                 </div>
 
                 <div class="form-group full-width">
-                    <input type="password" name="confirm_password" class="form-input" placeholder="Confirm Password" required 
-                           oninput="validatePasswordMatch(this)">
+                    <input type="password" name="confirm_password" class="form-input" placeholder="Confirm Password" required>
                 </div>
 
-                <button type="submit" class="register-btn" id="registerBtn">
+                <button type="submit" class="register-btn">
                     Create Account
                 </button>
             </form>
 
             <div class="login-link">
-                Already have an account? <a href="login.html">Sign In</a>
+                Already have an account? <a href="/login">Sign In</a>
             </div>
 
             <div class="divider">
@@ -449,12 +405,12 @@
             </div>
 
             <div class="social-register">
-                <button class="social-btn" onclick="socialRegister('google')">
+                <a href="/auth/google" class="social-btn">
                     📧 Google
-                </button>
-                <button class="social-btn" onclick="socialRegister('github')">
+                </a>
+                <a href="/auth/github" class="social-btn">
                     🔗 GitHub
-                </button>
+                </a>
             </div>
         </div>
     </div>
@@ -468,6 +424,7 @@
     </div>
 
     <script>
+        // SLIDESHOW FUNCTIONALITY ONLY
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
         const indicators = document.querySelectorAll('.indicator');
@@ -503,147 +460,10 @@
             slideInterval = setInterval(nextSlide, 5000);
         });
 
-        // Password strength checker
-        function checkPasswordStrength(input) {
-            const password = input.value;
-            const strengthBar = document.getElementById('strengthBar');
-            const strengthText = document.getElementById('strengthText');
-            
-            let strength = 0;
-            let feedback = [];
-
-            if (password.length >= 8) strength++;
-            else feedback.push('at least 8 characters');
-
-            if (/[A-Z]/.test(password)) strength++;
-            else feedback.push('uppercase letter');
-
-            if (/[a-z]/.test(password)) strength++;
-            else feedback.push('lowercase letter');
-
-            if (/[0-9]/.test(password)) strength++;
-            else feedback.push('number');
-
-            if (/[^A-Za-z0-9]/.test(password)) strength++;
-            else feedback.push('special character');
-
-            // Update visual indicator
-            strengthBar.className = 'password-strength-bar';
-            if (strength <= 1) {
-                strengthBar.classList.add('strength-weak');
-                strengthText.textContent = 'Weak - Add: ' + feedback.slice(0, 2).join(', ');
-                strengthText.style.color = '#ef4444';
-            } else if (strength <= 2) {
-                strengthBar.classList.add('strength-fair');
-                strengthText.textContent = 'Fair - Add: ' + feedback.slice(0, 2).join(', ');
-                strengthText.style.color = '#f59e0b';
-            } else if (strength <= 3) {
-                strengthBar.classList.add('strength-good');
-                strengthText.textContent = 'Good - Almost there!';
-                strengthText.style.color = '#10b981';
-            } else {
-                strengthBar.classList.add('strength-strong');
-                strengthText.textContent = 'Strong password!';
-                strengthText.style.color = '#059669';
-            }
-        }
-
-        // Validation functions
-        function validateUsername(input) {
-            const username = input.value.trim();
-            if (username.length < 3) {
-                input.classList.add('error');
-            } else {
-                input.classList.remove('error');
-            }
-        }
-
-        function validateEmail(input) {
-            const email = input.value.trim();
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                input.classList.add('error');
-            } else {
-                input.classList.remove('error');
-            }
-        }
-
-        function validatePincode(input) {
-            const pincode = input.value.trim();
-            if (pincode.length !== 6 || !/^\d{6}$/.test(pincode)) {
-                input.classList.add('error');
-            } else {
-                input.classList.remove('error');
-            }
-        }
-
-        function validateVehicleNo(input) {
-            const vehicleNo = input.value.trim().toUpperCase();
-            input.value = vehicleNo;
-            // Basic validation for Indian vehicle numbers
-            const vehicleRegex = /^[A-Z]{2}[0-9]{1,2}[A-Z]{1,2}[0-9]{1,4}$/;
-            if (!vehicleRegex.test(vehicleNo) && vehicleNo.length > 0) {
-                input.classList.add('error');
-            } else {
-                input.classList.remove('error');
-            }
-        }
-
-        function validatePasswordMatch(input) {
-            const password = document.querySelector('input[name="password"]').value;
-            const confirmPassword = input.value;
-            if (password !== confirmPassword && confirmPassword.length > 0) {
-                input.classList.add('error');
-            } else {
-                input.classList.remove('error');
-            }
-        }
-
-        // Form handling
-        function handleRegister(event) {
-            event.preventDefault();
-            const formData = new FormData(event.target);
-            const registerData = Object.fromEntries(formData);
-            
-            // Validate passwords match
-            if (registerData.password !== registerData.confirm_password) {
-                alert('Passwords do not match!');
-                return;
-            }
-
-            // Remove confirm_password from data before sending
-            delete registerData.confirm_password;
-            
-            console.log('Registration data:', registerData);
-            
-            // Show loading state
-            const btn = document.getElementById('registerBtn');
-            btn.disabled = true;
-            btn.innerHTML = '<div class="loading"></div> Creating Account...';
-            
-            // Simulate API call (replace with actual registration logic)
-            setTimeout(() => {
-                btn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
-                btn.innerHTML = '✓ Account Created!';
-                
-                // Reset after 2 seconds (remove this in production)
-                setTimeout(() => {
-                    btn.disabled = false;
-                    btn.style.background = 'linear-gradient(135deg, #9333ea, #4f46e5)';
-                    btn.innerHTML = 'Create Account';
-                }, 2000);
-            }, 2000);
-        }
-
-        function socialRegister(provider) {
-            console.log(`${provider} registration clicked`);
-            // Add your social registration logic here
-        }
-
-        // Initialize
+        // Initialize slideshow
         showSlide(0);
 
-        // Auto-format vehicle number input
+        // Auto-format vehicle number input to uppercase
         document.querySelector('input[name="vehicle_no"]').addEventListener('input', function(e) {
             this.value = this.value.toUpperCase();
         });

@@ -15,33 +15,31 @@
       <div class="sidebar-header">
         <div class="logo">
           <div class="logo-icon">🅿️</div>
-          <div class="logo-text">ParkSmart</div>
+          <div class="logo-text">ParkNGo</div>
         </div>
       </div>
       <nav class="nav-menu">
-        <a href="user_dashboard.html" class="nav-item active">
+        <a href="{{ url_for('dashboard') }}" class="nav-item active">
           <span>🏠</span> Dashboard
         </a>
-        <a href="user_search_parking.html" class="nav-item">
+        <a href="{{ url_for('search_parking') }}" class="nav-item">
           <span>🔍</span> Search Parking
         </a>
-        <a href="user_summary.html" class="nav-item">
-          <span>📊</span> Summary
-        </a>
-        <a href="edit_profile.html" class="nav-item">
+        <a href="{{ url_for('profile') }}" class="nav-item">
           <span>👤</span> Edit Profile
         </a>
-        <a href="user_logout.html" class="nav-item">
+        <a href="{{ url_for('logout') }}" class="nav-item">
           <span>🚪</span> Logout
         </a>
       </nav>
+      
     </aside>
 
     <!-- Main Content -->
     <main class="main-content">
       <div class="top-header fade-in-up">
         <div class="header-left">
-          <h1>Welcome to Your Dashboard</h1>
+          <h1>Welcome {{user.username}}</h1>5
           <div class="breadcrumb">User <span class="separator">/</span> Dashboard</div>
         </div>
       </div>
