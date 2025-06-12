@@ -19,18 +19,20 @@
         </div>
       </div>
       <nav class="nav-menu">
-        <a href="{{ url_for('dashboard') }}" class="nav-item active">
+        <a href="{{ url_for('dashboard') }}" class="nav-item ">
           <span>🏠</span> Dashboard
         </a>
-        <a href="{{ url_for('search_parking') }}" class="nav-item">
+        <a href="{{ url_for('search_parking') }}" class="nav-item active">
           <span>🔍</span> Search Parking
         </a>
         <a href="{{ url_for('profile') }}" class="nav-item">
           <span>👤</span> Edit Profile
         </a>
-        <a href="{{ url_for('logout') }}" class="nav-item">
-          <span>🚪</span> Logout
-        </a>
+        <a href="{{ url_for('summary') }}" class="nav-item">
+          <span>📊</span> Summary
+          <a href="{{ url_for('logout') }}" class="nav-item">
+            <span>🚪</span> Logout
+          </a>
       </nav>
       
     </aside>

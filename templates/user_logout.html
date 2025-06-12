@@ -2,10 +2,10 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Logout - ParkSmart</title>
-  <link rel="stylesheet" href="../static/styles.css">
+  <link rel="stylesheet" href="../static/styles.css" />
 </head>
 
 <body>
@@ -19,7 +19,7 @@
         </div>
       </div>
       <nav class="nav-menu">
-        <a href="{{ url_for('dashboard') }}" class="nav-item active">
+        <a href="{{ url_for('dashboard') }}" class="nav-item">
           <span>🏠</span> Dashboard
         </a>
         <a href="{{ url_for('search_parking') }}" class="nav-item">
@@ -28,11 +28,13 @@
         <a href="{{ url_for('profile') }}" class="nav-item">
           <span>👤</span> Edit Profile
         </a>
-        <a href="{{ url_for('logout') }}" class="nav-item">
+        <a href="{{ url_for('summary') }}" class="nav-item">
+          <span>📊</span> Summary
+        </a>
+        <a href="{{ url_for('logout') }}" class="nav-item active">
           <span>🚪</span> Logout
         </a>
       </nav>
-      
     </aside>
 
     <!-- Main Content -->
@@ -48,12 +50,12 @@
         <div class="card-header">
           <div class="card-title">Ready to Leave?</div>
         </div>
-        
+
         <div class="logout-content">
           <div class="logout-icon">
             <span class="logout-emoji">👋</span>
           </div>
-          
+
           <div class="logout-text">
             <h3>Thanks for using ParkSmart!</h3>
             <p>Your session will be safely terminated. You can always come back anytime.</p>
@@ -73,28 +75,32 @@
               <span class="info-value">1 ongoing</span>
             </div>
           </div>
-          
+
+          <!-- Logout Actions -->
           <div class="logout-actions">
-            <button class="btn btn-primary" onclick="confirmLogout()">
-              🚪 Confirm Logout
-            </button>
-            <a href="user_dashboard.html" class="btn btn-secondary">
+            <form method="POST" action="{{ url_for('logout') }}">
+              <button class="btn btn-primary" type="submit">
+                🚪 Confirm Logout
+              </button>
+            </form>
+            <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">
               ↩️ Stay Logged In
             </a>
           </div>
 
           <div class="logout-note">
-            <p><strong>Note:</strong> Your ongoing parking sessions will remain active. You can log back in anytime to manage them.</p>
+            <p><strong>Note:</strong> Your ongoing parking sessions will remain active. You can log back in anytime to
+              manage them.</p>
           </div>
         </div>
       </div>
 
-      <!-- Quick Stats Before Logout -->
+      <!-- Session Summary -->
       <div class="card fade-in-up">
         <div class="card-header">
           <div class="card-title">Your Session Summary</div>
         </div>
-        
+
         <div class="session-stats">
           <div class="session-stat">
             <div class="stat-icon">🅿️</div>
@@ -103,7 +109,7 @@
               <div class="stat-label">Parking Searches</div>
             </div>
           </div>
-          
+
           <div class="session-stat">
             <div class="stat-icon">📱</div>
             <div class="stat-info">
@@ -111,7 +117,7 @@
               <div class="stat-label">New Booking</div>
             </div>
           </div>
-          
+
           <div class="session-stat">
             <div class="stat-icon">💰</div>
             <div class="stat-info">
@@ -123,17 +129,6 @@
       </div>
     </main>
   </div>
-
-  <script>
-    // Add fade-in animation to cards
-    document.addEventListener('DOMContentLoaded', function() {
-      const cards = document.querySelectorAll('.fade-in-up');
-      cards.forEach((card, index) => {
-        card.style.animationDelay = `${index * 0.1}s`;
-      });
-    });
-</script>
-
 
   <style>
     /* Logout-specific styles */
@@ -159,9 +154,19 @@
     }
 
     @keyframes wave {
-      0%, 100% { transform: rotate(0deg); }
-      25% { transform: rotate(-10deg); }
-      75% { transform: rotate(10deg); }
+
+      0%,
+      100% {
+        transform: rotate(0deg);
+      }
+
+      25% {
+        transform: rotate(-10deg);
+      }
+
+      75% {
+        transform: rotate(10deg);
+      }
     }
 
     .logout-text h3 {
@@ -291,43 +296,54 @@
       .logout-actions {
         flex-direction: column;
       }
-      
+
       .session-stats {
         grid-template-columns: 1fr;
       }
-      
+
       .logout-content {
         padding: 10px;
       }
+
       .logout-icon {
         width: 80px;
         height: 80px;
         font-size: 36px;
       }
+
       .logout-text h3 {
         font-size: 20px;
       }
+
       .logout-text p {
         font-size: 14px;
       }
+
       .session-info {
         max-width: 100%;
       }
+
       .session-stat {
         flex-direction: column;
         align-items: center;
         text-align: center;
       }
+
       .session-stat .stat-icon {
         width: 50px;
         height: 50px;
         font-size: 24px;
       }
+
       .session-stat .stat-number {
         font-size: 18px;
       }
+
       .session-stat .stat-label {
         font-size: 14px;
       }
     }
   </style>
+</body>
+
+</html>

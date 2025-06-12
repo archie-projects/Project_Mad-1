@@ -15,6 +15,7 @@ class User(db.Model, UserMixin):
   email = db.Column(db.String(120), unique=True, nullable=False)
   address = db.Column(db.String(200), nullable=False)
   pincode = db.Column(db.Integer, nullable=False)
+  phone_no = db.Column(db.Integer, nullable=False)
   password = db.Column(db.String(120), nullable=False)
   reservations = db.relationship('Reservation', backref='user')
   vehicle_no = db.Column(db.String(20), nullable=False)

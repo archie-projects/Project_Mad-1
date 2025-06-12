@@ -2,10 +2,10 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Edit Profile - ParkSmart</title>
-  <link rel="stylesheet" href="../static/styles.css">
+  <link rel="stylesheet" href="../static/styles.css" />
 </head>
 
 <body>
@@ -19,22 +19,22 @@
         </div>
       </div>
       <nav class="nav-menu">
-        <a href="{{ url_for('dashboard') }}" class="nav-item active">
+        <a href="{{ url_for('dashboard') }}" class="nav-item">
           <span>🏠</span> Dashboard
         </a>
         <a href="{{ url_for('search_parking') }}" class="nav-item">
           <span>🔍</span> Search Parking
         </a>
-        <a href="{{ url_for('profile') }}" class="nav-item">
+        <a href="{{ url_for('profile') }}" class="nav-item active">
           <span>👤</span> Edit Profile
         </a>
-        <a href="{{ url_for('logout') }}" class="nav-item">
-          <span>🚪</span> Logout
-        </a>
+        <a href="{{ url_for('summary') }}" class="nav-item">
+          <span>📊</span> Summary
+          <a href="{{ url_for('logout') }}" class="nav-item">
+            <span>🚪</span> Logout
+          </a>
       </nav>
-      
     </aside>
-    <!-- Main Content -->
     <!-- Main Content -->
     <main class="main-content">
       <div class="top-header fade-in-up">
@@ -48,7 +48,7 @@
         <div class="card-header">
           <div class="card-title">Update Your Information</div>
         </div>
-        
+
         <div class="profile-section">
           <!-- Profile Avatar Section -->
           <div class="profile-avatar-section">
@@ -64,24 +64,35 @@
           <form class="profile-form" onsubmit="handleProfileUpdate(event)">
             <div class="form-group">
               <label for="fullName" class="form-label">Full Name</label>
-              <input id="fullName" class="form-input" type="text" placeholder="Enter your full name" value="John Doe" required>
+              <input id="fullName" name="username" class="form-input" type="text" placeholder="Enter your full name"
+                value="{{ user.username }}" required readonly />
             </div>
-            
+
             <div class="form-group">
               <label for="email" class="form-label">Email Address</label>
-              <input id="email" class="form-input" type="email" placeholder="Enter your email" value="john.doe@example.com" required>
+              <input id="email" name="email" class="form-input" type="email" placeholder="Enter your email"
+                value="{{ user.email }}" required />
             </div>
-            
+
             <div class="form-group">
               <label for="phone" class="form-label">Phone Number</label>
-              <input id="phone" class="form-input" type="tel" placeholder="Enter your phone number" value="+91 9876543210" required>
+              <input id="phone" name="phone_no" class="form-input" type="tel" placeholder="Enter your phone number"
+                value="{{ user.phone_no }}" required />
             </div>
 
             <div class="form-group">
               <label for="address" class="form-label">Address</label>
-              <textarea id="address" class="form-textarea" placeholder="Enter your address" rows="3">123 Main Street, City, State</textarea>
+              <textarea id="address" name="address" class="form-textarea" placeholder="Enter your address"
+                rows="3">{{ user.address }}</textarea>
             </div>
-            
+
+            <!-- Added password field -->
+            <div class="form-group">
+              <label for="password" class="form-label">New Password</label>
+              <input id="password" name="password" class="form-input" type="password"
+                placeholder="Enter new password (leave blank to keep current)" autocomplete="new-password" />
+            </div>
+
             <div class="form-actions">
               <button class="btn btn-primary" type="submit">
                 💾 Save Changes
@@ -173,7 +184,8 @@
       letter-spacing: 0.5px;
     }
 
-    .form-input, .form-textarea {
+    .form-input,
+    .form-textarea {
       padding: 15px 20px;
       border: 1px solid rgba(147, 51, 234, 0.2);
       border-radius: 12px;
@@ -181,10 +193,11 @@
       background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(10px);
       transition: all 0.3s ease;
-      font-family: 'Inter', sans-serif;
+      font-family: "Inter", sans-serif;
     }
 
-    .form-input:focus, .form-textarea:focus {
+    .form-input:focus,
+    .form-textarea:focus {
       outline: none;
       border-color: #9333ea;
       box-shadow: 0 0 0 3px rgba(147, 51, 234, 0.1);
@@ -270,11 +283,11 @@
       border-radius: 50%;
     }
 
-    input:checked + .toggle-slider {
+    input:checked+.toggle-slider {
       background: linear-gradient(135deg, #9333ea, #4f46e5);
     }
 
-    input:checked + .toggle-slider:before {
+    input:checked+.toggle-slider:before {
       transform: translateX(26px);
     }
 
@@ -282,7 +295,7 @@
       .form-actions {
         flex-direction: column;
       }
-      
+
       .setting-item {
         flex-direction: column;
         gap: 15px;
