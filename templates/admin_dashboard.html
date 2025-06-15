@@ -14,7 +14,7 @@
       gap: 30px;
       margin-bottom: 40px;
     }
-    
+
     .lot-card {
       background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(20px);
@@ -26,7 +26,7 @@
       position: relative;
       overflow: hidden;
     }
-    
+
     .lot-card::before {
       content: '';
       position: absolute;
@@ -36,13 +36,13 @@
       height: 4px;
       background: linear-gradient(135deg, #9333ea, #4f46e5, #ec4899);
     }
-    
+
     .lot-card:hover {
       transform: translateY(-8px);
       box-shadow: 0 20px 60px rgba(147, 51, 234, 0.2);
       border-color: rgba(147, 51, 234, 0.3);
     }
-    
+
     .lot-header {
       display: flex;
       justify-content: space-between;
@@ -51,36 +51,36 @@
       padding-bottom: 20px;
       border-bottom: 1px solid rgba(147, 51, 234, 0.1);
     }
-    
+
     .lot-name {
       font-size: 20px;
       font-weight: 600;
       color: #1e293b;
       margin-bottom: 8px;
     }
-    
+
     .lot-address {
       color: #64748b;
       font-size: 14px;
       font-weight: 500;
     }
-    
+
     .lot-status {
       display: flex;
       gap: 10px;
     }
-    
+
     .parking-visual {
       margin-top: 20px;
     }
-    
+
     .parking-row {
       display: flex;
       gap: 10px;
       justify-content: center;
       flex-wrap: wrap;
     }
-    
+
     .parking-spot {
       width: 50px;
       height: 50px;
@@ -95,47 +95,50 @@
       cursor: pointer;
       position: relative;
     }
-    
+
     .parking-spot.occupied {
       background: linear-gradient(135deg, #ef4444, #dc2626);
       box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
       animation: subtle-pulse 3s ease-in-out infinite;
     }
-    
+
     .parking-spot.available {
       background: linear-gradient(135deg, #10b981, #059669);
       box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
     }
-    
+
     .parking-spot:hover {
       transform: scale(1.1);
       z-index: 10;
     }
-    
+
     .parking-spot.occupied:hover {
       box-shadow: 0 0 20px rgba(239, 68, 68, 0.6);
     }
-    
+
     .parking-spot.available:hover {
       box-shadow: 0 0 20px rgba(16, 185, 129, 0.6);
     }
-    
+
     @keyframes subtle-pulse {
-      0%, 100% { 
-        box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3); 
+
+      0%,
+      100% {
+        box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
       }
-      50% { 
-        box-shadow: 0 4px 20px rgba(239, 68, 68, 0.5); 
+
+      50% {
+        box-shadow: 0 4px 20px rgba(239, 68, 68, 0.5);
       }
     }
-    
+
     /* Header button alignment */
     .header-actions {
       display: flex;
       align-items: center;
       gap: 15px;
     }
-    
+
     .top-header {
       display: flex;
       justify-content: space-between;
@@ -143,7 +146,7 @@
       margin-bottom: 40px;
       padding: 20px 0;
     }
-    
+
     /* Add lot button container */
     .add-lot-container {
       text-align: center;
@@ -159,28 +162,40 @@
       <div class="sidebar-header">
         <div class="logo">
           <div class="logo-icon">🅿️</div>
-          <span class="logo-text">ParkTech Pro</span>
+          <span class="logo-text">ParkNGo</span>
         </div>
       </div>
       <nav class="nav-menu">
-        <a href="admin_dashboard.html" class="nav-item active">Dashboard</a>
-        <a href="admin_users.html" class="nav-item">Users</a>
-        <a href="admin_search.html" class="nav-item">Search</a>
-        <a href="admin_summary.html" class="nav-item">Summary</a>
+        <a href="{{ url_for('admin_dashboard') }}" class="nav-item active">
+          <span>🏠</span> Dashboard
+        </a>
+        <a href="{{ url_for('admin_users') }}" class="nav-item">
+          <span>👥</span> Users
+        </a>
+        <a href="{{ url_for('admin_add_lot') }}" class="nav-item">
+          <span>➕</span> Add Lot
+        </a>
+        <a href="{{ url_for('admin_search') }}" class="nav-item">
+          <span>🔍</span> Search
+        </a>
+        <a href="{{ url_for('admin_summary') }}" class="nav-item">
+          <span>📊</span> Summary
+        </a>
+        <a href="{{ url_for('admin_logout') }}" class="nav-item">
+          <span>🚪</span> Logout
+        </a>
       </nav>
-    </aside>
     
+    </aside>
+
     <main class="main-content">
       <div class="top-header">
         <div class="header-left">
           <h1>Admin Dashboard</h1>
           <div class="breadcrumb">Admin <span class="separator">›</span> Dashboard</div>
         </div>
-        <div class="header-actions">
-          <a href="admin_profile.html" class="btn btn-secondary">Edit Profile</a>
-        </div>
       </div>
-      
+
       <div class="lots-grid">
         <div class="lot-card fade-in-up">
           <div class="lot-header">
@@ -210,7 +225,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="lot-card fade-in-up">
           <div class="lot-header">
             <div>
@@ -240,9 +255,9 @@
           </div>
         </div>
       </div>
-      
+
       <div class="add-lot-container">
-        <a href="admin_add_lot.html" class="btn btn-primary">+ Add New Parking Lot</a>
+        <a href="{{ url_for('admin_add_lot') }}" class="btn btn-primary">+ Add New Parking Lot</a>
       </div>
     </main>
   </div>

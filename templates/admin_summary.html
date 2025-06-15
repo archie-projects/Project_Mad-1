@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Summary - ParkTech Pro</title>
+  <title>Admin Summary - ParkNGo</title>
   <link rel="stylesheet" href="../static/styles.css">
   <style>
     /* Enhanced stat cards with icons */
@@ -27,7 +27,6 @@
       overflow: hidden;
       box-shadow: 0 10px 40px rgba(147, 51, 234, 0.1);
     }
-    
     .stat-card::before {
       content: '';
       position: absolute;
@@ -179,15 +178,28 @@
       <div class="sidebar-header">
         <div class="logo">
           <div class="logo-icon">🅿️</div>
-          <span class="logo-text">ParkTech Pro</span>
+          <span class="logo-text">ParkNGo</span>
         </div>
       </div>
       <nav class="nav-menu">
-        <a href="admin_dashboard.html" class="nav-item">Dashboard</a>
-        <a href="admin_users.html" class="nav-item">Users</a>
-        <a href="admin_search.html" class="nav-item">Search</a>
-        <a href="admin_summary.html" class="nav-item active">Summary</a>
-        <a href="admin_profile.html" class="nav-item">Edit Profile</a>
+        <a href="{{ url_for('admin_dashboard') }}" class="nav-item">
+          <span>🏠</span> Dashboard
+        </a>
+        <a href="{{ url_for('admin_users') }}" class="nav-item">
+          <span>👥</span> Users
+        </a>
+        <a href="{{ url_for('admin_add_lot') }}" class="nav-item">
+          <span>➕</span> Add Lot
+        </a>
+        <a href="{{ url_for('admin_search') }}" class="nav-item">
+          <span>🔍</span> Search
+        </a>
+        <a href="{{ url_for('admin_summary') }}" class="nav-item active">
+          <span>📊</span> Summary
+        </a>
+        <a href="{{ url_for('admin_logout') }}" class="nav-item">
+          <span>🚪</span> Logout
+        </a>
       </nav>
     </aside>
     

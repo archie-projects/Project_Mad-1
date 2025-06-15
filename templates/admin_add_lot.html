@@ -4,8 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Add Parking Lot - ParkSmart Admin</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>Add Parking Lot - ParkNGo Admin</title>
+  <link rel="stylesheet" href="../static/styles.css">
 </head>
 
 <body>
@@ -15,26 +15,26 @@
       <div class="sidebar-header">
         <div class="logo">
           <div class="logo-icon">🅿️</div>
-          <div class="logo-text">ParkSmart</div>
+          <div class="logo-text">ParkNGo</div>
         </div>
       </div>
       <nav class="nav-menu">
-        <a href="admin_dashboard.html" class="nav-item">
+        <a href="{{ url_for('admin_dashboard') }}" class="nav-item">
           <span>🏠</span> Dashboard
         </a>
-        <a href="admin_users.html" class="nav-item">
+        <a href="{{ url_for('admin_users') }}" class="nav-item">
           <span>👥</span> Users
         </a>
-        <a href="admin_add_lot.html" class="nav-item active">
+        <a href="{{ url_for('admin_add_lot') }}" class="nav-item active">
           <span>➕</span> Add Lot
         </a>
-        <a href="admin_search.html" class="nav-item">
+        <a href="{{ url_for('admin_search') }}" class="nav-item">
           <span>🔍</span> Search
         </a>
-        <a href="admin_summary.html" class="nav-item">
+        <a href="{{ url_for('admin_summary') }}" class="nav-item">
           <span>📊</span> Summary
         </a>
-        <a href="admin_logout.html" class="nav-item">
+        <a href="{{ url_for('admin_logout') }}" class="nav-item">
           <span>🚪</span> Logout
         </a>
       </nav>
@@ -53,34 +53,38 @@
         <div class="card-header">
           <div class="card-title">New Parking Lot Details</div>
         </div>
-        <form class="form-container" onsubmit="handleSubmit(event)">
+        <form class="form-container" action="{{ url_for('admin_add_lot') }}" method="POST">
           <div class="form-group">
             <label for="locationName" class="form-label">Location Name</label>
-            <input id="locationName" class="form-input" type="text" placeholder="Enter location name" required>
+            <input id="locationName" name="locationName" class="form-input" type="text"
+              placeholder="Enter location name" required>
           </div>
-          
+
           <div class="form-group">
             <label for="address" class="form-label">Address</label>
-            <input id="address" class="form-input" type="text" placeholder="Enter full address" required>
+            <input id="address" name="address" class="form-input" type="text" placeholder="Enter full address" required>
           </div>
-          
+
           <div class="form-group">
             <label for="pincode" class="form-label">Pin Code</label>
-            <input id="pincode" class="form-input" type="text" placeholder="Enter pin code" pattern="[0-9]{6}" required>
+            <input id="pincode" name="pincode" class="form-input" type="text" placeholder="Enter pin code"
+              pattern="[0-9]{6}" required>
           </div>
-          
+
           <div class="form-row">
             <div class="form-group">
               <label for="totalSpots" class="form-label">Total Spots</label>
-              <input id="totalSpots" class="form-input" type="number" placeholder="Total parking spots" min="1" required>
+              <input id="totalSpots" name="totalSpots" class="form-input" type="number"
+                placeholder="Total parking spots" min="1" required>
             </div>
-            
+
             <div class="form-group">
               <label for="availableSpots" class="form-label">Available Spots</label>
-              <input id="availableSpots" class="form-input" type="number" placeholder="Currently available" min="0" required>
+              <input id="availableSpots" name="availableSpots" class="form-input" type="number"
+                placeholder="Currently available" min="0" required>
             </div>
           </div>
-          
+
           <div class="form-actions">
             <button class="btn btn-primary" type="submit">
               ➕ Add Parking Lot
@@ -96,7 +100,7 @@
 
   <script>
     // Add fade-in animation to cards
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       const cards = document.querySelectorAll('.fade-in-up');
       cards.forEach((card, index) => {
         card.style.animationDelay = `${index * 0.1}s`;
@@ -105,7 +109,7 @@
 
     function handleSubmit(event) {
       event.preventDefault();
-      
+
       const formData = {
         locationName: document.getElementById('locationName').value,
         address: document.getElementById('address').value,
@@ -113,11 +117,11 @@
         totalSpots: document.getElementById('totalSpots').value,
         availableSpots: document.getElementById('availableSpots').value
       };
-      
+
       // Simulate form submission
       alert('Parking lot added successfully!');
       console.log('Form data:', formData);
-      
+
       // Reset form after successful submission
       event.target.reset();
     }
@@ -185,7 +189,7 @@
         grid-template-columns: 1fr;
         gap: 15px;
       }
-      
+
       .form-actions {
         flex-direction: column;
       }

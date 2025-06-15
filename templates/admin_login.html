@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Slideshow Background */
+    .slideshow-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+    }
+
+    .slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 0;
+      transition: opacity 2s ease-in-out;
+    }
+
+    .slide.active {
+      opacity: 1;
+    }
+
+    .slide:nth-child(1) {
+      background-image: url('../static/img1.jpg');
+    }
+
+    .slide:nth-child(2) {
+      background-image: url('../static/img2.jpg');
+    }
+
+    .slide:nth-child(3) {
+      background-image: url('../static/img3.jpg');
+    }
+
+    .slide:nth-child(4) {
+      background-image: url('../static/img4.jpg');
+    }
+
+    /* Overlay */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg,
+          rgba(147, 51, 234, 0.8),
+          rgba(79, 70, 229, 0.7),
+          rgba(236, 72, 153, 0.6));
+      z-index: -1;
+    }
+
+    /* Main Container */
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    /* Login Card */
+    .login-card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      border-radius: 24px;
+      padding: 40px;
+      width: 100%;
+      max-width: 450px;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      animation: slideUp 0.8s ease-out;
+      margin: 20px 0;
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Header */
+    .login-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .login-title {
+      font-size: 28px;
+      font-weight: 700;
+      background: linear-gradient(135deg, #9333ea, #4f46e5, #ec4899);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 8px;
+    }
+
+    .login-subtitle {
+      color: #6b7280;
+      font-size: 16px;
+      font-weight: 400;
+    }
+
+    /* Form */
+    .login-form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .form-group {
+      position: relative;
+      width: 100%;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 16px 20px;
+      border: 2px solid #e5e7eb;
+      border-radius: 12px;
+      font-size: 16px;
+      background: rgba(255, 255, 255, 0.8);
+      transition: all 0.3s ease;
+      outline: none;
+    }
+
+    .form-input:focus {
+      border-color: #9333ea;
+      background: rgba(255, 255, 255, 1);
+      box-shadow: 0 0 0 4px rgba(147, 51, 234, 0.1);
+    }
+
+    .form-input::placeholder {
+      color: #9ca3af;
+    }
+
+    .form-input.error {
+      border-color: #ef4444;
+      box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.1);
+    }
+
+    /* Login Button */
+    .login-btn {
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(135deg, #9333ea, #4f46e5);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      margin-top: 10px;
+    }
+
+    .login-btn:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(147, 51, 234, 0.3);
+    }
+
+    .login-btn:active:not(:disabled) {
+      transform: translateY(0);
+    }
+
+    .login-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    /* Slideshow Indicators */
+    .indicators {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+      z-index: 10;
+    }
+
+    .indicator {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.5);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .indicator.active {
+      background: rgba(255, 255, 255, 1);
+      transform: scale(1.2);
+    }
+
+    /* Alert Messages */
+    .alert {
+      padding: 12px 16px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .alert-error {
+      background: rgba(239, 68, 68, 0.1);
+      color: #dc2626;
+      border: 1px solid rgba(239, 68, 68, 0.2);
+    }
+
+    .alert-success {
+      background: rgba(34, 197, 94, 0.1);
+      color: #16a34a;
+      border: 1px solid rgba(34, 197, 94, 0.2);
+    }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      .login-card {
+        padding: 30px 20px;
+        margin: 20px 10px;
+        border-radius: 20px;
+        max-width: none;
+      }
+
+      .login-title {
+        font-size: 24px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 20px 10px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Slideshow Background -->
+  <div class="slideshow-container">
+    <div class="slide active"></div>
+    <div class="slide"></div>
+    <div class="slide"></div>
+    <div class="slide"></div>
+  </div>
+
+  <!-- Overlay -->
+  <div class="overlay"></div>
+
+  <!-- Main Container -->
+  <div class="container">
+    <div class="login-card">
+      <div class="login-header">
+        <h1 class="login-title">Welcome Admin</h1>
+        <p class="login-subtitle">Sign in to your admin account</p>
+      </div>
+
+      <form class="login-form" method="POST" action="{{ url_for('admin_login') }}">
+        <div class="form-group">
+          <input type="text" name="username" class="form-input" placeholder="Username" required maxlength="120"
+            autocomplete="username">
+        </div>
+
+        <div class="form-group">
+          <input type="password" name="password" class="form-input" placeholder="Password" required maxlength="120"
+            autocomplete="current-password">
+        </div>
+
+        <button type="submit" class="login-btn">
+          Sign In
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Slideshow Indicators -->
+  <div class="indicators">
+    <div class="indicator active" onclick="goToSlide(0)"></div>
+    <div class="indicator" onclick="goToSlide(1)"></div>
+    <div class="indicator" onclick="goToSlide(2)"></div>
+    <div class="indicator" onclick="goToSlide(3)"></div>
+  </div>
+
+  <script>
+    // SLIDESHOW FUNCTIONALITY
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const indicators = document.querySelectorAll('.indicator');
+    const totalSlides = slides.length;
+
+    function showSlide(index) {
+      slides.forEach(slide => slide.classList.remove('active'));
+      indicators.forEach(indicator => indicator.classList.remove('active'));
+      slides[index].classList.add('active');
+      indicators[index].classList.add('active');
+      currentSlide = index;
+    }
+
+    function nextSlide() {
+      const next = (currentSlide + 1) % totalSlides;
+      showSlide(next);
+    }
+
+    function goToSlide(index) {
+      showSlide(index);
+    }
+
+    // Auto slideshow
+    let slideInterval = setInterval(nextSlide, 5000);
+
+    // Pause slideshow on hover
+    const loginCard = document.querySelector('.login-card');
+    loginCard.addEventListener('mouseenter', () => {
+      clearInterval(slideInterval);
+    });
+
+    loginCard.addEventListener('mouseleave', () => {
+      slideInterval = setInterval(nextSlide, 5000);
+    });
+
+    // Initialize slideshow
+    showSlide(0);
+  </script>
+</body>
+
+</html>

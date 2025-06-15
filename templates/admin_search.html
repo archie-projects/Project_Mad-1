@@ -1,11 +1,10 @@
 <!-- admin_search.html -->
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Search - ParkTech Pro</title>
+  <title>Search - ParkNGo </title>
   <link rel="stylesheet" href="../static/styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
@@ -352,21 +351,27 @@
       <div class="sidebar-header">
         <div class="logo">
           <div class="logo-icon">🅿️</div>
-          <span class="logo-text">ParkTech Pro</span>
+          <span class="logo-text">ParkNGo</span>
         </div>
       </div>
       <nav class="nav-menu">
-        <a href="admin_dashboard.html" class="nav-item">
-          <span class="nav-text">Dashboard</span>
+        <a href="{{ url_for('admin_dashboard') }}" class="nav-item">
+          <span>🏠</span> Dashboard
         </a>
-        <a href="admin_users.html" class="nav-item">
-          <span class="nav-text">Users</span>
+        <a href="{{ url_for('admin_users') }}" class="nav-item">
+          <span>👥</span> Users
         </a>
-        <a href="admin_search.html" class="nav-item active">
-          <span class="nav-text">Search</span>
+        <a href="{{ url_for('admin_add_lot') }}" class="nav-item">
+          <span>➕</span> Add Lot
         </a>
-        <a href="admin_summary.html" class="nav-item">
-          <span class="nav-text">Summary</span>
+        <a href="{{ url_for('admin_search') }}" class="nav-item active">
+          <span>🔍</span> Search
+        </a>
+        <a href="{{ url_for('admin_summary') }}" class="nav-item">
+          <span>📊</span> Summary
+        </a>
+        <a href="{{ url_for('admin_logout') }}" class="nav-item">
+          <span>🚪</span> Logout
         </a>
       </nav>
     </aside>
@@ -378,9 +383,6 @@
           <div class="breadcrumb">
             Admin <span class="separator">•</span> Search & Analytics
           </div>
-        </div>
-        <div class="header-actions">
-          <a href="admin_profile.html" class="btn-secondary">Edit Profile</a>
         </div>
       </div>
       

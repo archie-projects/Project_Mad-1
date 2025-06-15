@@ -504,43 +504,7 @@
 
     // Initialize slideshow
     showSlide(0);
-
-    // Form validation
-    const loginForm = document.querySelector('.login-form');
-    const usernameInput = document.querySelector('input[name="username"]');
-    const passwordInput = document.querySelector('input[name="password"]');
-
-    loginForm.addEventListener('submit', function (e) {
-      let isValid = true;
-
-      // Reset previous error states
-      usernameInput.classList.remove('error');
-      passwordInput.classList.remove('error');
-
-      // Validate username/email
-      if (!usernameInput.value.trim()) {
-        usernameInput.classList.add('error');
-        isValid = false;
-      }
-
-      // Validate password
-      if (!passwordInput.value) {
-        passwordInput.classList.add('error');
-        isValid = false;
-      }
-
-      if (!isValid) {
-        e.preventDefault();
-      }
-    });
-
-    // Clear error state on input
-    [usernameInput, passwordInput].forEach(input => {
-      input.addEventListener('input', function () {
-        this.classList.remove('error');
-      });
-    });
-  </script>
+  </script>  
 </body>
 
 </html>

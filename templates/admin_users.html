@@ -11,14 +11,28 @@
     <div class="sidebar-header">
       <div class="logo">
         <div class="logo-icon">🅿️</div>
-        <span class="logo-text">ParkTech Pro</span>
+        <span class="logo-text">ParkNGo</span>
       </div>
     </div>
     <nav class="nav-menu">
-      <a href="admin_dashboard.html" class="nav-item"><span class="nav-text">Dashboard</span></a>
-      <a href="admin_users.html" class="nav-item active"><span class="nav-text">Users</span></a>
-      <a href="admin_search.html" class="nav-item"><span class="nav-text">Search</span></a>
-      <a href="admin_summary.html" class="nav-item"><span class="nav-text">Summary</span></a>
+      <a href="{{ url_for('admin_dashboard') }}" class="nav-item">
+        <span>🏠</span> Dashboard
+      </a>
+      <a href="{{ url_for('admin_users') }}" class="nav-item active">
+        <span>👥</span> Users
+      </a>
+      <a href="{{ url_for('admin_add_lot') }}" class="nav-item">
+        <span>➕</span> Add Lot
+      </a>
+      <a href="{{ url_for('admin_search') }}" class="nav-item">
+        <span>🔍</span> Search
+      </a>
+      <a href="{{ url_for('admin_summary') }}" class="nav-item">
+        <span>📊</span> Summary
+      </a>
+      <a href="{{ url_for('admin_logout') }}" class="nav-item">
+        <span>🚪</span> Logout
+      </a>
     </nav>
   </aside>
   <main class="main-content">
@@ -53,7 +67,7 @@
       <!-- Search Bar -->
       <div style="margin-bottom: 25px;">
         <input type="text" placeholder="Search users by name or email..." 
-               style="width: 100%; padding: 12px 16px; border: 1px solid rgba(147, 51, 234, 0.2); border-radius: 12px; font-size: 14px; background: rgba(255, 255, 255, 0.8); transition: all 0.3s ease;">
+              style="width: 100%; padding: 12px 16px; border: 1px solid rgba(147, 51, 234, 0.2); border-radius: 12px; font-size: 14px; background: rgba(255, 255, 255, 0.8); transition: all 0.3s ease;">
       </div>
       
       <!-- Users Table -->
